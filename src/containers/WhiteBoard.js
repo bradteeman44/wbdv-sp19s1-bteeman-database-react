@@ -1,6 +1,6 @@
 import React from "react";
 import CourseTable from "./CourseTable";
-import HomePage from "../components/HomePage.css";
+import HomePage from "../styling/HomePage.css";
 
 
 class WhiteBoard extends React.Component {
