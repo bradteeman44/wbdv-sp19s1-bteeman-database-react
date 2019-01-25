@@ -1,4 +1,4 @@
-function CourseServiceClient() {
+function CourseService() {
     this.createCourse = createCourse;
     this.findAllCourses = findAllCourses;
     this.findCourseById = findCourseById;
@@ -6,7 +6,7 @@ function CourseServiceClient() {
     this.deleteCourse = deleteCourse;
     this.url = '';
     var self = this;
-    
+
     function createCourse(course) {
 
     }
