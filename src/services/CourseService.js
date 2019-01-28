@@ -7,7 +7,7 @@ class CourseService {
     addCourse = course => {
         if(course === null) {
             course = {
-                id: (new Date()).getTime(),
+                id: (Math.random() * 1000000000),
                 title: 'New Course'
             }
         }
