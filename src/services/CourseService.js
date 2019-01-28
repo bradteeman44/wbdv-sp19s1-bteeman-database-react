@@ -1,29 +1,36 @@
-function CourseService() {
-    this.createCourse = createCourse;
-    this.findAllCourses = findAllCourses;
-    this.findCourseById = findCourseById;
-    this.updateCourse = updateCourse;
-    this.deleteCourse = deleteCourse;
-    this.url = '';
-    var self = this;
+import courses from './courses.json'
 
-    function createCourse(course) {
+class CourseService {
+    constructor() {
+        this.courses = courses;
+    }
+    addCourse = course => {
+        if(course === null) {
+            course = {
+                id: (new Date()).getTime(),
+                title: 'New Course'
+            }
+        }
+        this.courses.push(course)
+        return this.courses
+    }
+
+    findCourseById = courseId =>
+        this.courses = this.courses.find(
+            course => course.id === courseId
+        )
+
+    findAllCourses = () =>
+        this.courses;
+
+    deleteCourse = deleteCourse =>
+        this.courses = this.courses.filter(
+            course => course.id !== deleteCourse.id
+        )
+
+    updateCourse = (id, course) => {
 
     }
 
-    function findAllCourses() {
-
-    }
-
-    function findCourseById(id) {
-
-    }
-
-    function updateCourse(id, course) {
-
-    }
-
-    function deleteCourse(id) {
-
-    }
 }
+export default CourseService

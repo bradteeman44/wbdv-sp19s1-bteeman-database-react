@@ -1,9 +1,28 @@
 import React from "react";
 import CourseTable from "./CourseTable";
+import CourseService from '../services/CourseService'
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 import HomePage from "../components/HomePage.css";
+import {Link, Route, Router} from "react-router-dom";
 
 
 class WhiteBoard extends React.Component {
+    constructor() {
+        super();
+        this.courseService = new CourseService()
+        this.state = {
+            courses: this.courseService.findAllCourses()
+        }
+    }
+    deleteCourse = course =>
+        this.setState({
+            courses: this.courseService.deleteCourse(course)
+        })
+    addCourse = () =>
+        this.setState({
+            courses: this.courseService.addCourse(null)
+        })
+
     render() {
         return (
             <html>
@@ -30,7 +49,9 @@ class WhiteBoard extends React.Component {
                     <i className="fa fa-plus"></i>
                 </button>
             </nav>
-            <CourseTable />
+                <div> |
+                    <CourseTable courses={this.state.courses}/>}/>
+                </div>
             </html>
         )
     }

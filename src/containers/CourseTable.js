@@ -1,7 +1,16 @@
 import React from "react";
+
 import CourseRow from "../components/CourseRow";
 
 class CourseTable extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            courses: this.props.courses
+        }
+    }
+
     render() {
         return (
             <body>
@@ -19,7 +28,9 @@ class CourseTable extends React.Component {
                 </div>
             </div>
             <div className="container" id="coursesCreatedToday">
-                <CourseRow/>
+                {this.state.courses.map((course) =>
+                    <CourseRow course={course} key={course.id}/>
+                )}
             </div>
             </body>
         )

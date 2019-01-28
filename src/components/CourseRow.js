@@ -7,13 +7,7 @@ const CourseRow = (course) => {
                 <a className="btn btn-primary btn-sm"
                    href="/course-editor/course-editor.template.client.html"
                    id="course"> <i className="fa fa-bars fa-sm"></i>
-                </a> CS5610 Web development
-            </div>
-            <div className="col d-block d-sm-none">
-                <a className="btn btn-primary btn-sm"
-                   href="/course-editor/course-editor.template.client.html"
-                   id="course"> <i className="fa fa-bars fa-sm"></i>
-                </a> CS5610 Web development
+                </a> {course.title}
             </div>
             <div className="col-2 d-none d-sm-block" id="owned">me</div>
             <div className="col-2 d-none d-sm-block" id="modified">6:45 PM</div>
