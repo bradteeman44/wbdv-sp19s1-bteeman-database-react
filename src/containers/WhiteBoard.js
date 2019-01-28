@@ -2,7 +2,7 @@ import React from "react";
 import CourseTable from "./CourseTable";
 import CourseService from '../services/CourseService'
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
-import HomePage from "../components/HomePage.css";
+import HomePage from "../styling/HomePage.css";
 import {Link, Route, Router} from "react-router-dom";
 
 
