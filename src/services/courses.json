@@ -9,11 +9,31 @@
         "lessons": [
           {
             "id": 1,
-            "title": "Lesson 1"
+            "title": "Lesson 1",
+            "topics": [
+              {
+                "id": 1,
+                "title": "jQuery 1.1"
+              },
+              {
+                "id": 2,
+                "title": "jQuery 1.2"
+              }
+            ]
           },
           {
             "id": 2,
-            "title": "Lesson 2"
+            "title": "Lesson 2",
+            "topics": [
+              {
+                "id": 1,
+                "title": "jQuery 2.1"
+              },
+              {
+                "id": 2,
+                "title": "jQuery 2.2"
+              }
+            ]
           }
         ]
       },
@@ -23,11 +43,31 @@
         "lessons": [
           {
             "id": 3,
-            "title": "Lesson 3"
+            "title": "Lesson 3",
+            "topics": [
+              {
+                "id": 1,
+                "title": "Topic React 3.1"
+              },
+              {
+                "id": 2,
+                "title": "Topic React 3.2"
+              }
+            ]
           },
           {
             "id": 4,
-            "title": "Lesson 4"
+            "title": "Lesson 4",
+            "topics": [
+              {
+                "id": 1,
+                "title": "React 4.1"
+              },
+              {
+                "id": 2,
+                "title": "React 4.2"
+              }
+            ]
           }
         ]
       }
@@ -39,11 +79,71 @@
     "modules": [
       {
         "id": 3,
-        "title": "SQL"
+        "title": "SQL",
+        "lessons": [
+          {
+            "id": 1,
+            "title": "Lesson 1",
+            "topics": [
+              {
+                "id": 1,
+                "title": "SQL 1.1"
+              },
+              {
+                "id": 2,
+                "title": "SQL 1.2"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Lesson 2",
+            "topics": [
+              {
+                "id": 1,
+                "title": "SQL 2.1"
+              },
+              {
+                "id": 2,
+                "title": "SQL 2.2"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 4,
-        "title": "JPA"
+        "title": "JPA",
+        "lessons": [
+          {
+            "id": 1,
+            "title": "Lesson 1",
+            "topics": [
+              {
+                "id": 1,
+                "title": "JPA 1.1"
+              },
+              {
+                "id": 2,
+                "title": "JPA 1.2"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Lesson 2",
+            "topics": [
+              {
+                "id": 1,
+                "title": "JPA 2.1"
+              },
+              {
+                "id": 2,
+                "title": "JPA 2.2"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -53,11 +153,71 @@
     "modules": [
       {
         "id": 5,
-        "title": "Agile"
+        "title": "Agile",
+        "lessons": [
+          {
+            "id": 1,
+            "title": "Lesson 1",
+            "topics": [
+              {
+                "id": 1,
+                "title": "Agile 1.1"
+              },
+              {
+                "id": 2,
+                "title": "Agile 1.2"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Lesson 2",
+            "topics": [
+              {
+                "id": 1,
+                "title": "Agile 2.1"
+              },
+              {
+                "id": 2,
+                "title": "Agile 2.2"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 6,
-        "title": "Testing"
+        "title": "Testing",
+        "lessons": [
+          {
+            "id": 1,
+            "title": "Lesson 1",
+            "topics": [
+              {
+                "id": 1,
+                "title": "Testing 1.1"
+              },
+              {
+                "id": 2,
+                "title": "Testing 1.2"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "Lesson 2",
+            "topics": [
+              {
+                "id": 1,
+                "title": "Testing 2.1"
+              },
+              {
+                "id": 2,
+                "title": "Testing 2.2"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
