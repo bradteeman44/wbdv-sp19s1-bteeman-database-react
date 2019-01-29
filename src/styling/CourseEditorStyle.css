@@ -1,24 +1,22 @@
 #addModule {
-    background-color: DimGray;
+    background-color: steelblue;
     color: white;
     font-size: 24px;
     margin-top: 5px;
 }
 
 #addLesson {
-    margin-left: 5px;
-    background-color: DimGray;
+    background-color: steelblue;
     color: white;
-    padding-top: 15px;
     font-size: 24px;
+    margin-top: 5px;
 }
 
 #addTopic {
-    background-color: Gray;
+    background-color: steelblue;
     color: white;
     font-size: 24px;
-    margin: 5px;
-    height: 40px;
+    margin-top: 5px;
 }
 
 #arrowBtnUp {
@@ -53,6 +51,10 @@ h1 {
 
 h3 {
     margin-bottom: 10px;
+}
+
+h6 {
+    padding: 10px;
 }
 
 #paraTextFld {
@@ -123,6 +125,7 @@ h3 {
     background-color: Gray;
     margin: 5px;
     color: white;
+    border: 2px solid black;
 }
 
 #modules {
@@ -130,9 +133,10 @@ h3 {
 }
 
 #lesson {
-    background-color: DimGray;
+    background-color: Gray;
     margin: 5px;
     color: white;
+    border: 2px solid black;
 }
 
 #lessons {
@@ -145,6 +149,7 @@ h3 {
     background-color: Gray;
     margin: 5px;
     color: white;
+    border: 2px solid black;
 }
 
 #saveBtn {
@@ -153,4 +158,12 @@ h3 {
 
 #previewBtn {
     padding-top: 5px;
+}
+
+#lessonBtns {
+    margin: 20px;
+}
+
+#topicBtns {
+    margin: 20px;
 }

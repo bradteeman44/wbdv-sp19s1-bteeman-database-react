@@ -10,7 +10,9 @@ class ModuleList extends React.Component {
             modules: this.props.modules
         };
 
-        // this.titleChanged = this.titleChanged.bind(this);
+        this.titleChanged = this.titleChanged.bind(this);
+        this.createModule = this.createModule.bind(this);
+        this.deleteModule = this.deleteModule.bind(this);
     }
 
     createModule = () => {
@@ -45,20 +47,9 @@ class ModuleList extends React.Component {
 
     render() {
         return (
-            <div id="modules">
+            <div>
                 <ul className="list-group">
-                    <li className="list-group-item">
-                        <input
-                            onChange={this.titleChanged}
-                            className="form-control"/>
-                        <button
-                            onClick={this.createModule}
-                            className="btn btn-block"
-                            value="ADDMODULE"
-                            id="addModule">
-                            <i className="fa fa-plus"></i>
-                        </button>
-                    </li>
+
                     {
                         this.state.modules.map(
                             (module) => {
@@ -72,6 +63,18 @@ class ModuleList extends React.Component {
                             }
                         )
                     }
+                    <li className="list-group-item" id="module">
+                        <input
+                            onChange={this.titleChanged}
+                            className="form-control"/>
+                        <button
+                            onClick={this.createModule}
+                            className="btn btn-block"
+                            value="ADDMODULE"
+                            id="addModule">
+                            <i className="fa fa-plus"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         )
