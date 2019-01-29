@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Link, Redirect, Route} from 'react-router-dom'
 import CourseGrid from './CourseGrid'
 import CourseTable from './CourseTable'
 import CourseService from '../services/CourseService'
 import CourseEditor from "../components/CourseEditor";
 import HomePage from "../styling/HomePage.css";
-import {library} from '@fortawesome/fontawesome-svg-core'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 class WhiteBoard extends Component {
     constructor() {
@@ -16,6 +14,8 @@ class WhiteBoard extends Component {
             course: {title: '', id: ''},
             courses: this.courseService.findAllCourses()
         }
+
+        this.titleChanged = this.titleChanged.bind(this);
     }
 
     deleteCourse = course =>
@@ -30,7 +30,7 @@ class WhiteBoard extends Component {
     titleChanged = (event) =>
         this.setState(
             {
-                course: {title: event.target.value, id: (Math.random() * 1000000000)}
+                course: {title: event.target.value, id: (new Date()).getTime()}
             });
 
     render() {
@@ -44,9 +44,8 @@ class WhiteBoard extends Component {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <a className="navbar-brand" href="#">Course Manager</a>
                         <ul className="navbar-nav">
-                            <li className="nav-item active"><a className="nav-link"></a></li>
-                            <li className="nav-item"><a className="nav-link"></a></li>
-                            <li className="nav-item"><a className="nav-link"></a></li>
+                            <li className="nav-item"></li>
+                            <li className="nav-item"></li>
                         </ul>
                     </div>
                     <label htmlFor="newCourseTitleFld"></label> <input
@@ -57,24 +56,9 @@ class WhiteBoard extends Component {
                         <i className="fa fa-plus"></i>
                     </button>
                 </nav>
-                <div className="container d-none d-md-block" id="header">
-                    <div className="row">
-                        <div className="col-6">Title</div>
-                        <div className="col-2">Owned by</div>
-                        <div className="col-2">Last modified by me</div>
-                        <div className="col-1">
-                            <button type="button" className="btn" data-toggle="button" aria-pressed="false">
-                                <i className="fa fa-th"></i>
-                            </button>
-                        </div>
-                        <div className="col-1">
-                            <FontAwesomeIcon icon={"sort-alpha-down"}/>
-                        </div>
-                    </div>
-                </div>
                 <Router>
                     <div>
-                        <Link to="/">Course Grid</Link> |
+                        <Link to="/">Course Grid</Link>
                         <Link to="/table">Course Table</Link>
                         <Route path='/' exact
                                render={() =>
