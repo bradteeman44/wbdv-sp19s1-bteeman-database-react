@@ -1,6 +1,5 @@
 import React from 'react'
 import CourseCard from '../components/CourseCard'
-import CourseGridStyle from '../styling/CourseGridStyle.css'
 import {Link} from "react-router-dom";
 
 const CourseGrid = ({courses, deleteCourse, addCourse}) =>
