@@ -6,7 +6,7 @@ class ModuleList extends React.Component {
         super(props)
 
         this.state = {
-            module: {id: '', title: ''},
+            module: {id: (new Date()).getTime(), title: 'New Module', lessons: [{}]},
             modules: this.props.modules
         };
 
@@ -41,7 +41,7 @@ class ModuleList extends React.Component {
     titleChanged = (event) => {
         this.setState(
             {
-                module: {id: (Math.random() * 1000000000), title: event.target.value}
+                module: {id: (new Date()).getTime(), title: event.target.value, lessons: [{topics: [{}]}]}
             });
     }
 
@@ -53,6 +53,9 @@ class ModuleList extends React.Component {
                     {
                         this.state.modules.map(
                             (module) => {
+                                if(module == null) {
+                                    return null
+                                }
                                 return (
                                     <ModuleListItem
                                         selectModule={this.props.selectModule}
@@ -66,6 +69,8 @@ class ModuleList extends React.Component {
                     <li className="list-group-item" id="module">
                         <input
                             onChange={this.titleChanged}
+                            value={this.state.module.title}
+                            placeholder="New Module"
                             className="form-control"/>
                         <button
                             onClick={this.createModule}

@@ -167,3 +167,14 @@ h6 {
 #topicBtns {
     margin: 20px;
 }
+
+#fixedAddWidget {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: hsl(0, 80%, 50%);
+    border-color: hsl(0, 80%, 50%);
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}

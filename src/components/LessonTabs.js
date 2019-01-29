@@ -6,7 +6,7 @@ class LessonTabs extends React.Component {
         super(props)
 
         this.state = {
-            lesson: {id: '', title: ''},
+            lesson: {id: (new Date()).getTime(), title: 'New Lesson', topics: [{}]},
             lessons: this.props.lessons
         };
 
@@ -31,22 +31,23 @@ class LessonTabs extends React.Component {
         )
     }
 
-    /*filterLessons = lessonToDelete =>
+    filterLessons = lessonToDelete =>
         this.state.lessons.slice().filter(
             lesson => lesson.id !== lessonToDelete.id
         )
 
 
-    deleteLesson = lessonToDelete =>
+    deleteLesson = lessonToDelete => {
         this.setState({
             lessons: this.filterLessons(lessonToDelete)
-        })*/
+        })
+    }
 
 
     titleChanged = (event) => {
         this.setState(
             {
-                lesson: {id: (Math.random() * 1000000000), title: event.target.value}
+                lesson: {id: (new Date()).getTime(), title: event.target.value, topics: [{}]}
             });
     }
 
@@ -56,10 +57,13 @@ class LessonTabs extends React.Component {
             <ul className="nav nav-tabs" id="lessons">
                 {
                     this.state.lessons.map((lesson) => {
+                        if(lesson == null) {
+                            return null
+                        }
                             return (
                                 <LessonTabsItem
                                     selectLesson={this.props.selectLesson}
-                                    //deleteLesson={this.deleteLesson()}
+                                    deleteLesson={this.deleteLesson}
                                     key={lesson.id}
                                     lesson={lesson}/>
                             )
@@ -69,6 +73,8 @@ class LessonTabs extends React.Component {
                 <li className="list-group-item" id="lesson">
                     <input
                         onChange={this.titleChanged}
+                        value={this.state.lesson.title}
+                        placeholder="New Lesson"
                         className="form-control"/>
                     <button
                         onClick={this.createLesson}

@@ -1,5 +1,4 @@
 import React from 'react'
-import LessonTabsItem from "./LessonTabsItem";
 import TopicPillsItem from "./TopicPillsItem";
 
 class TopicPills extends React.Component {
@@ -7,9 +6,13 @@ class TopicPills extends React.Component {
         super(props)
 
         this.state = {
-            topic: {id: '', title: ''},
+            topic: {id: (new Date()).getTime(), title: 'New Topic'},
             topics: this.props.topics
         };
+
+        if(this.props.topics == null) {
+            this.createTopic()
+        }
 
         this.titleChanged = this.titleChanged.bind(this);
         this.createTopic = this.createTopic.bind(this);
@@ -32,22 +35,22 @@ class TopicPills extends React.Component {
         )
     }
 
-    /*filterLessons = lessonToDelete =>
-        this.state.lessons.slice().filter(
-            lesson => lesson.id !== lessonToDelete.id
+    filterTopics = topicToDelete =>
+        this.state.topics.slice().filter(
+            topic => topic.id !== topicToDelete.id
         )
 
 
-    deleteLesson = lessonToDelete =>
+    deleteTopic = topicToDelete =>
         this.setState({
-            lessons: this.filterLessons(lessonToDelete)
-        })*/
+            topics: this.filterTopics(topicToDelete)
+        })
 
 
     titleChanged = (event) => {
         this.setState(
             {
-                topic: {id: (Math.random() * 1000000000), title: event.target.value}
+                topic: {id: (new Date()).getTime(), title: event.target.value}
             });
     }
 
@@ -60,7 +63,7 @@ class TopicPills extends React.Component {
                             return (
                                 <TopicPillsItem
                                     selectTopic={this.props.selectTopic}
-                                    //deleteLesson={this.deleteLesson()}
+                                    deleteTopic={this.deleteTopic}
                                     key={topic.id}
                                     topic={topic}/>
                             )
@@ -70,6 +73,8 @@ class TopicPills extends React.Component {
                 <li className="list-group-item" id="topic">
                     <input
                         onChange={this.titleChanged}
+                        value={this.state.topic.title}
+                        placeholder="New Topic"
                         className="form-control"/>
                     <button
                         onClick={this.createTopic}
