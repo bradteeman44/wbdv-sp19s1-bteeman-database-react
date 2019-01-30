@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ModuleListItem = ({module, selectModule, selectedModule, deleteModule}) =>
+const ModuleListItem = ({module, selectModule, selectedModule, deleteModule, updateModule}) =>
     <li onClick={() => selectModule(module)}
         className={module === selectedModule? "list-group-item active":"list-group-item"}
         id="module">
@@ -15,7 +15,8 @@ const ModuleListItem = ({module, selectModule, selectedModule, deleteModule}) =>
                 <i className="fa fa-trash"></i>
             </button>
             <button
-                className="btn-outline-primary">
+                className="btn-outline-primary"
+                onClick={() => updateModule(module)}>
                 <i className="fa fa-pencil"></i>
             </button>
        </span>

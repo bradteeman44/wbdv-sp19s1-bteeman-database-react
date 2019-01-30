@@ -12,7 +12,8 @@ class WhiteBoard extends Component {
         this.courseService = new CourseService()
         this.state = {
             course: {title: 'New Course', modules: [{lessons: [{topics: [{}]}]}]},
-            courses: this.courseService.findAllCourses()
+            courses: this.courseService.findAllCourses(),
+            updateCourse: {title: ''}
         }
 
         this.titleChanged = this.titleChanged.bind(this);
@@ -27,10 +28,16 @@ class WhiteBoard extends Component {
             courses: this.courseService.addCourse(this.state.course)
         })
 
+    updateCourse = course =>
+        this.setState({
+            courses: this.props.courseService.updateCourse(this.props.course, course, this.state.updateCourse)
+        })
+
     titleChanged = (event) =>
         this.setState(
             {
-                course: {title: event.target.value}
+                course: {title: event.target.value},
+                updateCourse: {title: event.target.value}
             });
 
     render() {

@@ -7,7 +7,8 @@ class ModuleList extends React.Component {
 
         this.state = {
             module: {title: 'New Module', lessons: [{topics: [{}]}]},
-            modules: this.props.modules
+            modules: this.props.modules,
+            updateModuleFld: ''
         };
 
         this.titleChanged = this.titleChanged.bind(this);
@@ -17,7 +18,8 @@ class ModuleList extends React.Component {
 
     createModule = () =>
         this.setState({
-            modules: this.props.courseService.addModule(this.props.course, this.state.module)
+            modules: this.props.courseService.addModule(this.props.course, this.state.module),
+            updateModuleFld: ''
         })
 
     deleteModule = module =>
@@ -25,20 +27,25 @@ class ModuleList extends React.Component {
             modules: this.props.courseService.deleteModule(this.props.course, module)
         })
 
+    updateModule = module =>
+        this.setState({
+            modules: this.props.courseService.updateModule(this.props.course, module, this.state.updateModuleFld),
+            updateModuleFld: ''
+        })
+
     titleChanged = (event) => {
         this.setState(
             {
-                module: {title: event.target.value, lessons: [{topics: [{}]}]}
+                module: {title: event.target.value, lessons: [{topics: [{}]}]},
+                updateModuleFld: event.target.value
             });
     }
-
     render() {
         return (
             <div>
                 <ul className="list-group">
                     {
-                        this.state.modules.map(
-                            (module) => {
+                        this.state.modules.map(module => {
                                 if(module == null) {
                                     return null
                                 }
@@ -47,6 +54,7 @@ class ModuleList extends React.Component {
                                         selectedModule={this.props.selectedModule}
                                         selectModule={this.props.selectModule}
                                         deleteModule={this.deleteModule}
+                                        updateModule={this.updateModule}
                                         key={module.id}
                                         module={module}/>
                                 )
@@ -58,7 +66,7 @@ class ModuleList extends React.Component {
                         id="module">
                         <input
                             onChange={this.titleChanged}
-                            value={this.state.module.title}
+                            value={this.state.updateModuleFld}
                             placeholder="New Module"
                             className="form-control"/>
                         <button

@@ -7,7 +7,8 @@ class TopicPills extends React.Component {
 
         this.state = {
             topic: {title: 'New Topic'},
-            topics: this.props.topics
+            topics: this.props.topics,
+            updateTopicFld: ''
         };
 
         if(this.props.topics == null) {
@@ -26,7 +27,8 @@ class TopicPills extends React.Component {
 
     createTopic = () =>
         this.setState({
-            topics: this.props.courseService.addTopic(this.props.lesson, this.state.topic)
+            topics: this.props.courseService.addTopic(this.props.lesson, this.state.topic),
+            updateTopicFld: ''
         })
 
     deleteTopic = topic =>
@@ -34,10 +36,17 @@ class TopicPills extends React.Component {
             topics: this.props.courseService.deleteTopic(this.props.lesson, topic)
         })
 
+    updateTopic = topic =>
+        this.setState({
+            topics: this.props.courseService.updateTopic(this.props.lesson, topic, this.state.updateTopicFld),
+            updateTopicFld: ''
+        })
+
     titleChanged = (event) => {
         this.setState(
             {
-                topic: {title: event.target.value}
+                topic: {title: event.target.value},
+                updateTopicFld: event.target.value
             });
     }
 
@@ -51,6 +60,7 @@ class TopicPills extends React.Component {
                                     selectTopic={this.props.selectTopic}
                                     deleteTopic={this.deleteTopic}
                                     selectedTopic={this.props.selectedTopic}
+                                    updateTopic={this.updateTopic}
                                     key={topic.id}
                                     topic={topic}/>
                             )
@@ -61,8 +71,9 @@ class TopicPills extends React.Component {
                     className="list-group-item"
                     id="topic">
                     <input
+                        type="text"
                         onChange={this.titleChanged}
-                        value={this.state.topic.title}
+                        value={this.state.updateTopicFld}
                         placeholder="New Topic"
                         className="form-control"/>
                     <button

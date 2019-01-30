@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LessonTabsItem = ({lesson, selectLesson, selectedLesson, deleteLesson}) =>
+const LessonTabsItem = ({lesson, selectLesson, selectedLesson, deleteLesson, updateLesson}) =>
     <li
         id="lesson"
         onClick={() => selectLesson(lesson)}
@@ -20,7 +20,8 @@ const LessonTabsItem = ({lesson, selectLesson, selectedLesson, deleteLesson}) =>
                 <i className="fa fa-trash"></i>
             </button>
             <button
-                className="btn-outline-primary">
+                className="btn-outline-primary"
+                onClick={() => updateLesson(lesson)}>
                 <i className="fa fa-pencil"></i>
             </button>
        </span>

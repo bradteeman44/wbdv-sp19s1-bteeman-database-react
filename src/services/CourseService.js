@@ -31,8 +31,9 @@ class CourseService {
             course => course.id !== deleteCourse.id
         )
 
-    updateCourse = (id, course) => {
-
+    updateCourse = (course, updateCourseFld) => {
+        course.title = updateCourseFld
+        return this.courses
     }
 
     addModule = (course, module) => {
@@ -53,6 +54,11 @@ class CourseService {
             module => module.id !== deleteModule.id
         )
 
+    updateModule = (course, module, updateModuleFld) => {
+        module.title = updateModuleFld
+        return course.modules
+    }
+
     addLesson = (module, lesson) => {
         if (lesson === null) {
             lesson = {
@@ -71,6 +77,11 @@ class CourseService {
             lesson => lesson.id !== deleteLesson.id
         )
 
+    updateLesson = (module, lesson, updateLessonFld) => {
+        lesson.title = updateLessonFld
+        return module.lessons
+    }
+
     addTopic = (lesson, topic) => {
         if (topic === null) {
             topic = {
@@ -87,6 +98,11 @@ class CourseService {
         lesson.topics = lesson.topics.filter(
             lesson => lesson.id !== deleteTopic.id
         )
+
+    updateTopic = (lesson, topic, updateTopicFld) => {
+        topic.title = updateTopicFld
+        return lesson.topics
+    }
 
 }
 

@@ -17,9 +17,22 @@ class CourseEditor extends React.Component {
             course: course,
             selectedModule: course.modules[0],
             selectedLesson: course.modules[0].lessons[0],
-            selectedTopic: course.modules[0].lessons[0].topics[0]
+            selectedTopic: course.modules[0].lessons[0].topics[0],
+            updateCourse: ''
         }
     }
+
+    updateCourse = course =>
+        this.setState({
+            courses: this.courseService.updateCourse(course, this.state.updateCourseFld),
+            updateCourseFld: ''
+        })
+
+    titleChanged = (event) =>
+        this.setState(
+            {
+                updateCourseFld: event.target.value
+            });
 
     selectModule = module =>
         this.setState({
@@ -48,9 +61,24 @@ class CourseEditor extends React.Component {
                 <h1>
                     <Link
                         id="tableBtn"
-                        className="btn-lg float-left btn-primary"
+                        className="btn-lg float-left btn-dark"
                         to={`/table`}><i className="fa fa-list"></i></Link>
                         Course Editor: {this.state.course.title}
+                    <span className="float-right">
+                    <input
+                        className="form-control"
+                        type="text"
+                        id="editCourseTitleFld"
+                        placeholder="Edit Course Title"
+                        value = {this.state.updateCourseFld}
+                        onChange={this.titleChanged}/>
+                    <button
+                        id="courseEditBtn"
+                        className="btn-lg float-left btn-primary btn-block"
+                        onClick={() => this.updateCourse(this.state.course)}>
+                        <i className="fa fa-pencil"></i>
+                    </button>
+                    </span>
                 </h1>
                 <div
                     className="row">

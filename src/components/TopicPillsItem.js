@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TopicPillsItem = ({topic, selectTopic, selectedTopic, deleteTopic}) =>
+const TopicPillsItem = ({topic, selectTopic, selectedTopic, deleteTopic, updateTopic}) =>
     <li
         id="topic"
         onClick={() => selectTopic(topic)}
@@ -20,7 +20,8 @@ const TopicPillsItem = ({topic, selectTopic, selectedTopic, deleteTopic}) =>
                 <i className="fa fa-trash"></i>
             </button>
             <button
-                className="btn-outline-primary">
+                className="btn-outline-primary"
+                onClick={() => updateTopic(topic)}>
                 <i className="fa fa-pencil"></i>
             </button>
        </span>

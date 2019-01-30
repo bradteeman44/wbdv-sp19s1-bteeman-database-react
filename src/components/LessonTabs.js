@@ -7,7 +7,8 @@ class LessonTabs extends React.Component {
 
         this.state = {
             lesson: {title: 'New Lesson', topics: [{}]},
-            lessons: this.props.lessons
+            lessons: this.props.lessons,
+            updateLessonFld: ''
         };
 
         this.titleChanged = this.titleChanged.bind(this);
@@ -22,7 +23,8 @@ class LessonTabs extends React.Component {
 
     createLesson = () =>
         this.setState({
-            lessons: this.props.courseService.addLesson(this.props.module, this.state.lesson)
+            lessons: this.props.courseService.addLesson(this.props.module, this.state.lesson),
+            updateLessonFld: ''
         })
 
     deleteLesson = lesson =>
@@ -30,10 +32,17 @@ class LessonTabs extends React.Component {
             lessons: this.props.courseService.deleteLesson(this.props.module, lesson)
         })
 
+    updateLesson = lesson =>
+        this.setState({
+            modules: this.props.courseService.updateLesson(this.props.module, lesson, this.state.updateLessonFld),
+            updateLessonFld: ''
+        })
+
     titleChanged = (event) => {
         this.setState(
             {
-                lesson: {title: event.target.value, topics: [{}]}
+                lesson: {title: event.target.value, topics: [{}]},
+                updateLessonFld: event.target.value
             });
     }
 
@@ -51,6 +60,7 @@ class LessonTabs extends React.Component {
                                     selectLesson={this.props.selectLesson}
                                     deleteLesson={this.deleteLesson}
                                     selectedLesson={this.props.selectedLesson}
+                                    updateLesson={this.updateLesson}
                                     key={lesson.id}
                                     lesson={lesson}/>
                             )
@@ -62,7 +72,7 @@ class LessonTabs extends React.Component {
                     id="lesson">
                     <input
                         onChange={this.titleChanged}
-                        value={this.state.lesson.title}
+                        value={this.state.updateLessonFld}
                         placeholder="New Lesson"
                         className="form-control"/>
                     <button

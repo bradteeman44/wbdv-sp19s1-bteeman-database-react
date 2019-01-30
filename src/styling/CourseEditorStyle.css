@@ -166,6 +166,10 @@ h6 {
     margin-right: 10px;
 }
 
+#courseEditBtn {
+    margin-right: 10px;
+}
+
 #addWidgetBtn {
     margin-bottom: 30px;
     background-color: red;
@@ -179,4 +183,12 @@ h6 {
 
 #widgetListAll {
     background-color: white;
+}
+
+#editCourseTitleFld {
+
+}
+
+#courseEditBtn {
+    margin-top: 5px;
 }
