@@ -10,7 +10,7 @@ class CourseService {
             course = {
                 id: (new Date()).getTime(),
                 title: 'New Course',
-                modules: [{lessons: [{topics: [{}]}]}]
+                modules: [{id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]}]
             }
         }
         course.id = (new Date()).getTime()

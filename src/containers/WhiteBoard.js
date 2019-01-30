@@ -11,7 +11,7 @@ class WhiteBoard extends Component {
         super();
         this.courseService = new CourseService()
         this.state = {
-            course: {title: 'New Course', modules: [{lessons: [{topics: [{}]}]}]},
+            course: {title: 'New Course', modules: [{id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]}]},
             courses: this.courseService.findAllCourses(),
             updateCourse: {title: ''}
         }

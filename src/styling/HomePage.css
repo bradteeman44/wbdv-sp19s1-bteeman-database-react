@@ -4,7 +4,6 @@
     font-size: 20px;
     font-weight: bold;
     background-color: Gainsboro;
-    padding-top: 70px;
 }
 
 #row {
@@ -47,7 +46,7 @@
     right: 50px;
 }
 
-#courseEditBtn {
+#course {
     margin-right: 20px;
 }
 
@@ -72,4 +71,14 @@ h5 {
 
 #cardDeleteBtn {
     margin: 10px;
+}
+.card {
+}
+
+#courseTable {
+    padding-top: 70px;
+}
+
+#courseGrid {
+    padding-top: 70px;
 }

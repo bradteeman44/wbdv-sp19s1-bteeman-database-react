@@ -3,7 +3,7 @@ import CourseRow from "../components/CourseRow";
 import {Link} from "react-router-dom";
 
 const CourseTable = ({courses, deleteCourse}) =>
-    <div>
+    <div id="courseTable">
         <div
             className="container d-none d-md-block"
             id="header">

@@ -15,11 +15,20 @@ const CourseRow = ({course, deleteCourse}) => {
                 className="col-sm-6 d-none d-sm-block">
                 <Link
                     className="btn btn-primary btn-sm"
-                    id="courseEditBtn"
+                    id="course"
                     to={`/course/${course.id}`}>
                     <i className="fa fa-bars fa-sm"></i>
                 </Link>
                     {course.title}
+            </div>
+            <div className="col d-block d-sm-none">
+                <Link
+                    className="btn btn-primary btn-sm"
+                    id="course"
+                    to={`/course/${course.id}`}>
+                    <i className="fa fa-bars fa-sm"></i>
+                </Link>
+                {course.title}
             </div>
             <div
                 className="col-2 d-none d-sm-block"

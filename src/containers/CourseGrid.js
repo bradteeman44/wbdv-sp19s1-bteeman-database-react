@@ -3,7 +3,7 @@ import CourseCard from '../components/CourseCard'
 import {Link} from "react-router-dom";
 
 const CourseGrid = ({courses, deleteCourse}) =>
-    <div>
+    <div id="courseGrid">
         <div
             className="container d-none d-md-block"
             id="header">
@@ -33,8 +33,7 @@ const CourseGrid = ({courses, deleteCourse}) =>
                 </div>
             </div>
         </div>
-        <div
-            className="card-deck">
+        <div className="row">
             {
                 courses.map(course =>
                     <CourseCard
