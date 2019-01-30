@@ -6,7 +6,7 @@ class LessonTabs extends React.Component {
         super(props)
 
         this.state = {
-            lesson: {id: (new Date()).getTime(), title: 'New Lesson', topics: [{}]},
+            lesson: {title: 'New Lesson', topics: [{}]},
             lessons: this.props.lessons
         };
 
@@ -20,41 +20,27 @@ class LessonTabs extends React.Component {
         }
     }
 
-    createLesson = () => {
-        this.setState(
-            {
-                lessons: [
-                    ...this.state.lessons,
-                    this.state.lesson
-                ]
-            }
-        )
-    }
-
-    filterLessons = lessonToDelete =>
-        this.state.lessons.slice().filter(
-            lesson => lesson.id !== lessonToDelete.id
-        )
-
-
-    deleteLesson = lessonToDelete => {
+    createLesson = () =>
         this.setState({
-            lessons: this.filterLessons(lessonToDelete)
+            lessons: this.props.courseService.addLesson(this.props.module, this.state.lesson)
         })
-    }
 
+    deleteLesson = lesson =>
+        this.setState({
+            lessons: this.props.courseService.deleteLesson(this.props.module, lesson)
+        })
 
     titleChanged = (event) => {
         this.setState(
             {
-                lesson: {id: (new Date()).getTime(), title: event.target.value, topics: [{}]}
+                lesson: {title: event.target.value, topics: [{}]}
             });
     }
 
     render() {
         return (
-
-            <ul className="nav nav-tabs" id="lessons">
+            <ul className="nav nav-tabs"
+                id="lessons">
                 {
                     this.state.lessons.map((lesson) => {
                         if(lesson == null) {
@@ -64,13 +50,16 @@ class LessonTabs extends React.Component {
                                 <LessonTabsItem
                                     selectLesson={this.props.selectLesson}
                                     deleteLesson={this.deleteLesson}
+                                    selectedLesson={this.props.selectedLesson}
                                     key={lesson.id}
                                     lesson={lesson}/>
                             )
                         }
                     )
                 }
-                <li className="list-group-item" id="lesson">
+                <li
+                    className="list-group-item"
+                    id="lesson">
                     <input
                         onChange={this.titleChanged}
                         value={this.state.lesson.title}
@@ -85,8 +74,6 @@ class LessonTabs extends React.Component {
                     </button>
                 </li>
             </ul>
-
-
         )
     }
 }

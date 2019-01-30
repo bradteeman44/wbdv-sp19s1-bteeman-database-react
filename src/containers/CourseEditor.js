@@ -5,6 +5,7 @@ import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
 import CourseEditorStyle from "../styling/CourseEditorStyle.css"
 import WidgetList from "../components/WidgetList";
+import {Link} from 'react-router-dom'
 
 class CourseEditor extends React.Component {
     constructor(props) {
@@ -14,55 +15,76 @@ class CourseEditor extends React.Component {
         const course = this.courseService.findCourseById(courseId);
         this.state = {
             course: course,
-            module: course.modules[0],
-            lesson: course.modules[0].lessons[0],
-            topic: course.modules[0].lessons[0].topics[0]
+            selectedModule: course.modules[0],
+            selectedLesson: course.modules[0].lessons[0],
+            selectedTopic: course.modules[0].lessons[0].topics[0]
         }
     }
+
     selectModule = module =>
         this.setState({
-            module: module,
-            lesson: module.lessons[0],
-            topic: module.lessons[0].topics[0]
+            selectedModule: module,
+            selectedLesson: module.lessons[0],
+            selectedTopic: module.lessons[0].topics[0]
         })
 
     selectLesson = lesson =>
         this.setState({
-            lesson: lesson,
-            topic: lesson.topics[0]
+            selectedLesson: lesson,
+            selectedTopic: lesson.topics[0]
         })
 
     selectTopic = topic =>
         this.setState({
-            topic: topic
+            selectedTopic: topic
         })
 
 
     render() {
         return (
-            <div className="container-fluid">
-                <h1>Course Editor: {this.state.course.title}</h1>
-                <div className="row">
-                    <div className="col-2" id="modules">
+            <div
+                className="container-fluid"
+                id="courseEditor">
+                <h1>
+                    <Link
+                        id="tableBtn"
+                        className="btn-lg float-left btn-primary"
+                        to={`/table`}><i className="fa fa-list"></i></Link>
+                        Course Editor: {this.state.course.title}
+                </h1>
+                <div
+                    className="row">
+                    <div
+                        className="col-2"
+                        id="modules">
                         <ModuleList
                             selectModule={this.selectModule}
-                            modules={this.state.course.modules}/>
+                            selectedModule={this.state.selectedModule}
+                            modules={this.state.course.modules}
+                            course={this.state.course}
+                            courseService={this.courseService}
+                        />
                     </div>
-                    <div className="col-10">
+                    <div
+                        className="col-10">
                         <LessonTabs
-                            lessons={this.state.module.lessons}
+                            lessons={this.state.selectedModule.lessons}
+                            module={this.state.selectedModule}
                             selectLesson={this.selectLesson}
-                        />
+                            selectedLesson={this.state.selectedLesson}
+                            courseService={this.courseService}/>
                         <TopicPills
-                            topics={this.state.lesson.topics}
+                            topics={this.state.selectedLesson.topics}
+                            lesson={this.state.selectedLesson}
                             selectTopic={this.selectTopic}
-                        />
-                        <WidgetList
-                        />
+                            selectedTopic={this.state.selectedTopic}
+                            courseService={this.courseService}/>
+                        <WidgetList/>
                     </div>
                 </div>
             </div>
         )
     }
 }
+
 export default CourseEditor

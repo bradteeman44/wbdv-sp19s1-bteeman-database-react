@@ -11,7 +11,7 @@ class WhiteBoard extends Component {
         super();
         this.courseService = new CourseService()
         this.state = {
-            course: {title: '', id: ''},
+            course: {title: 'New Course', modules: [{lessons: [{topics: [{}]}]}]},
             courses: this.courseService.findAllCourses()
         }
 
@@ -30,36 +30,63 @@ class WhiteBoard extends Component {
     titleChanged = (event) =>
         this.setState(
             {
-                course: {title: event.target.value, id: (new Date()).getTime()}
+                course: {title: event.target.value}
             });
 
     render() {
         return (
             <div>
-                <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-                    <button className="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarNavDropdown">
-                        <span className="navbar-toggler-icon"></span>
+                <nav
+                    className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNavDropdown">
+                        <span
+                            className="navbar-toggler-icon">
+
+                        </span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                        <a className="navbar-brand" href="#">Course Manager</a>
+                    <div
+                        className="collapse navbar-collapse"
+                        id="navbarNavDropdown">
+                        <a
+                            className="navbar-brand"
+                            href="#">
+                            WhiteBoard
+                        </a>
                         <ul className="navbar-nav">
                             <li className="nav-item"></li>
                             <li className="nav-item"></li>
                         </ul>
                     </div>
-                    <label htmlFor="newCourseTitleFld"></label> <input
-                    className="form-control col-8" type="text" id="newCourseTitleFld"
-                    placeholder="New Course Title" onChange={this.titleChanged}/>
-                    <button className="btn btn-primary btn-circle" value="ADDCOURSEBTN"
-                            id="add" onClick={this.addCourse}>
-                        <i className="fa fa-plus"></i>
-                    </button>
+                    <label
+                        htmlFor="newCourseTitleFld">
+                    </label>
+                    <input
+                        className="form-control col-8"
+                        type="text"
+                        id="newCourseTitleFld"
+                        placeholder="New Course Title"
+                        onChange={this.titleChanged}/>
+                        <button
+                          className="btn btn-primary btn-circle"
+                          value="ADDCOURSEBTN"
+                          id="add" onClick={this.addCourse}>
+                            <i className="fa fa-plus"></i>
+                        </button>
                 </nav>
                 <Router>
                     <div>
-                        <Link to="/">Course Grid</Link>
-                        <Link to="/table">Course Table</Link>
+                        <Link
+                            to="/">
+                            Course Grid
+                        </Link>
+                        <Link
+                            to="/table">
+                            Course Table
+                        </Link>
                         <Route path='/' exact
                                render={() =>
                                    <CourseGrid
@@ -76,8 +103,11 @@ class WhiteBoard extends Component {
                                        deleteCourse={this.deleteCourse}/>}/>
                     </div>
                 </Router>
-                <button className="btn btn-primary btn-circle shadow "
-                        value="FIXEDADDCOURSEBTN" id="fixedAdd" onClick={this.addCourse}>
+                <button
+                    className="btn btn-primary btn-circle shadow "
+                    value="FIXEDADDCOURSEBTN"
+                    id="fixedAdd"
+                    onClick={this.addCourse}>
                     <i className="fa fa-plus"></i>
                 </button>
             </div>

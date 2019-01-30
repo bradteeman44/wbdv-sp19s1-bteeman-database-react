@@ -4,13 +4,16 @@ class CourseService {
     constructor() {
         this.courses = courses;
     }
+
     addCourse = course => {
-        if(course === null) {
+        if (course === null) {
             course = {
                 id: (new Date()).getTime(),
-                title: 'New Course'
+                title: 'New Course',
+                modules: [{lessons: [{topics: [{}]}]}]
             }
         }
+        course.id = (new Date()).getTime()
         this.courses.push(course)
         return this.courses
     }
@@ -32,5 +35,59 @@ class CourseService {
 
     }
 
+    addModule = (course, module) => {
+        if (module === null) {
+            module = {
+                id: (new Date()).getTime(),
+                title: 'New Module',
+                lessons: [{topics: [{}]}]
+            }
+        }
+        module.id = (new Date()).getTime()
+        course.modules.push(module)
+        return course.modules
+    }
+
+    deleteModule = (course, deleteModule) =>
+        course.modules = course.modules.filter(
+            module => module.id !== deleteModule.id
+        )
+
+    addLesson = (module, lesson) => {
+        if (lesson === null) {
+            lesson = {
+                id: (new Date()).getTime(),
+                title: 'New Lesson',
+                topics: [{}]
+            }
+        }
+        lesson.id = (new Date()).getTime()
+        module.lessons.push(lesson)
+        return module.lessons
+    }
+
+    deleteLesson = (module, deleteLesson) =>
+        module.lessons = module.lessons.filter(
+            lesson => lesson.id !== deleteLesson.id
+        )
+
+    addTopic = (lesson, topic) => {
+        if (topic === null) {
+            topic = {
+                id: (new Date()).getTime(),
+                title: 'New Topic'
+            }
+        }
+        topic.id = (new Date()).getTime()
+        lesson.topics.push(topic)
+        return lesson.topics
+    }
+
+    deleteTopic = (lesson, deleteTopic) =>
+        lesson.topics = lesson.topics.filter(
+            lesson => lesson.id !== deleteTopic.id
+        )
+
 }
+
 export default CourseService

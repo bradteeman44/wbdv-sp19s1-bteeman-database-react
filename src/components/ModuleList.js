@@ -6,7 +6,7 @@ class ModuleList extends React.Component {
         super(props)
 
         this.state = {
-            module: {id: (new Date()).getTime(), title: 'New Module', lessons: [{}]},
+            module: {title: 'New Module', lessons: [{topics: [{}]}]},
             modules: this.props.modules
         };
 
@@ -15,33 +15,20 @@ class ModuleList extends React.Component {
         this.deleteModule = this.deleteModule.bind(this);
     }
 
-    createModule = () => {
-        this.setState(
-            {
-                modules: [
-                    ...this.state.modules,
-                    this.state.module
-                ]
-            }
-        )
-    }
-
-    filterModules = moduleToDelete =>
-        this.state.modules.slice().filter(
-            module => module.id !== moduleToDelete.id
-        )
-
-
-    deleteModule = moduleToDelete =>
+    createModule = () =>
         this.setState({
-                modules: this.filterModules(moduleToDelete)
-            })
+            modules: this.props.courseService.addModule(this.props.course, this.state.module)
+        })
 
+    deleteModule = module =>
+        this.setState({
+            modules: this.props.courseService.deleteModule(this.props.course, module)
+        })
 
     titleChanged = (event) => {
         this.setState(
             {
-                module: {id: (new Date()).getTime(), title: event.target.value, lessons: [{topics: [{}]}]}
+                module: {title: event.target.value, lessons: [{topics: [{}]}]}
             });
     }
 
@@ -49,7 +36,6 @@ class ModuleList extends React.Component {
         return (
             <div>
                 <ul className="list-group">
-
                     {
                         this.state.modules.map(
                             (module) => {
@@ -58,6 +44,7 @@ class ModuleList extends React.Component {
                                 }
                                 return (
                                     <ModuleListItem
+                                        selectedModule={this.props.selectedModule}
                                         selectModule={this.props.selectModule}
                                         deleteModule={this.deleteModule}
                                         key={module.id}
@@ -66,7 +53,9 @@ class ModuleList extends React.Component {
                             }
                         )
                     }
-                    <li className="list-group-item" id="module">
+                    <li
+                        className="list-group-item"
+                        id="module">
                         <input
                             onChange={this.titleChanged}
                             value={this.state.module.title}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const WidgetList = () =>
-    <div>
+    <div id="widgetListAll">
         <div className="container-fluid" id="savePreviewBar">
             <div className="row justify-content-end">
                 <button className="btn btn-success" id="saveBtn">Save</button>
@@ -45,9 +45,9 @@ const WidgetList = () =>
             <form>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                                className="form-control wbdv-headingText-fld"
-                                                                id="headingTextFld"
-                                                                placeholder="Heading text"/>
+                                           className="form-control wbdv-headingText-fld"
+                                           id="headingTextFld"
+                                           placeholder="Heading text"/>
                 </div>
                 <div className="form-group row">
                     <label></label>
@@ -62,9 +62,9 @@ const WidgetList = () =>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                               className="form-control wbdv-widgetName-fld"
-                                                               id="widgetNameFld"
-                                                               placeholder="Widget name"/>
+                                           className="form-control wbdv-widgetName-fld"
+                                           id="widgetNameFld"
+                                           placeholder="Widget name"/>
                 </div>
             </form>
             <h4>Preview</h4>
@@ -110,9 +110,9 @@ const WidgetList = () =>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                               className="form-control wbdv-widgetName-fld"
-                                                               id="widgetNameFld"
-                                                               placeholder="Widget name"/>
+                                           className="form-control wbdv-widgetName-fld"
+                                           id="widgetNameFld"
+                                           placeholder="Widget name"/>
                 </div>
             </form>
             <h4>Preview</h4>
@@ -168,9 +168,9 @@ const WidgetList = () =>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                               className="form-control wbdv-widgetName-fld"
-                                                               id="widgetNameFld"
-                                                               placeholder="Widget name"/>
+                                           className="form-control wbdv-widgetName-fld"
+                                           id="widgetNameFld"
+                                           placeholder="Widget name"/>
                 </div>
             </form>
             <h4>Preview</h4>
@@ -215,14 +215,14 @@ const WidgetList = () =>
             <form>
                 <div className="form-group row">
                     <label></label> <input type="url"
-                                                             className="form-control wbdv-inmageURL-fld" id="imageURLFld"
-                                                             placeholder="Image URL"/>
+                                           className="form-control wbdv-inmageURL-fld" id="imageURLFld"
+                                           placeholder="Image URL"/>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                               className="form-control wbdv-widgetName-fld"
-                                                               id="widgetNameFld"
-                                                               placeholder="Widget name"/>
+                                           className="form-control wbdv-widgetName-fld"
+                                           id="widgetNameFld"
+                                           placeholder="Widget name"/>
                 </div>
             </form>
             <h4>Preview</h4>
@@ -265,24 +265,24 @@ const WidgetList = () =>
             <form>
                 <div className="form-group row">
                     <label></label> <input type="url"
-                                                            className="form-control wbdv-linkURL-fld" id="linkURLFld"
-                                                            placeholder="Link URL"/>
+                                           className="form-control wbdv-linkURL-fld" id="linkURLFld"
+                                           placeholder="Link URL"/>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                             className="form-control wbdv-linkText-fld" id="linkTextFld"
-                                                             placeholder="Link text"/>
+                                           className="form-control wbdv-linkText-fld" id="linkTextFld"
+                                           placeholder="Link text"/>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="url"
-                                                             className="form-control wbdv-linkURL2-fld" id="linkURL2Fld"
-                                                             placeholder="Link URL"/>
+                                           className="form-control wbdv-linkURL2-fld" id="linkURL2Fld"
+                                           placeholder="Link URL"/>
                 </div>
                 <div className="form-group row">
                     <label></label> <input type="text"
-                                                               className="form-control wbdv-widgetName-fld"
-                                                               id="widgetNameFld"
-                                                               placeholder="Widget name"/>
+                                           className="form-control wbdv-widgetName-fld"
+                                           id="widgetNameFld"
+                                           placeholder="Widget name"/>
                 </div>
             </form>
             <h4>Preview</h4>
@@ -290,8 +290,8 @@ const WidgetList = () =>
                 <a href="#" className="wbdv-preview-link">Link text</a>
             </div>
         </div>
-        <button className="btn btn-primary btn-circle shadow "
-                value="FIXEDADDWIDGETBTN" id="fixedAddWidget">
+        <button className="btn btn-danger btn-circle shadow float-right"
+                value="ADDWIDGETBTN" id="addWidgetBtn">
             <i className="fa fa-plus"></i>
         </button>
     </div>

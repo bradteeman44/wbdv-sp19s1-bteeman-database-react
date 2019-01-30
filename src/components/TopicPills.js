@@ -6,7 +6,7 @@ class TopicPills extends React.Component {
         super(props)
 
         this.state = {
-            topic: {id: (new Date()).getTime(), title: 'New Topic'},
+            topic: {title: 'New Topic'},
             topics: this.props.topics
         };
 
@@ -24,39 +24,25 @@ class TopicPills extends React.Component {
         }
     }
 
-    createTopic = () => {
-        this.setState(
-            {
-                topics: [
-                    ...this.state.topics,
-                    this.state.topic
-                ]
-            }
-        )
-    }
-
-    filterTopics = topicToDelete =>
-        this.state.topics.slice().filter(
-            topic => topic.id !== topicToDelete.id
-        )
-
-
-    deleteTopic = topicToDelete =>
+    createTopic = () =>
         this.setState({
-            topics: this.filterTopics(topicToDelete)
+            topics: this.props.courseService.addTopic(this.props.lesson, this.state.topic)
         })
 
+    deleteTopic = topic =>
+        this.setState({
+            topics: this.props.courseService.deleteTopic(this.props.lesson, topic)
+        })
 
     titleChanged = (event) => {
         this.setState(
             {
-                topic: {id: (new Date()).getTime(), title: event.target.value}
+                topic: {title: event.target.value}
             });
     }
 
     render() {
         return (
-
             <ul className="nav nav-pills" id="topics">
                 {
                     this.state.topics.map((topic) => {
@@ -64,13 +50,16 @@ class TopicPills extends React.Component {
                                 <TopicPillsItem
                                     selectTopic={this.props.selectTopic}
                                     deleteTopic={this.deleteTopic}
+                                    selectedTopic={this.props.selectedTopic}
                                     key={topic.id}
                                     topic={topic}/>
                             )
                         }
                     )
                 }
-                <li className="list-group-item" id="topic">
+                <li
+                    className="list-group-item"
+                    id="topic">
                     <input
                         onChange={this.titleChanged}
                         value={this.state.topic.title}
@@ -85,8 +74,6 @@ class TopicPills extends React.Component {
                     </button>
                 </li>
             </ul>
-
-
         )
     }
 }
