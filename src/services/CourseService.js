@@ -13,15 +13,15 @@ class CourseService {
                 modules: [{id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]}]
             }
         }
-        course.id = (new Date()).getTime()
-        this.courses.push(course)
+        course.id = (new Date()).getTime();
+        this.courses.push(course);
         return this.courses
-    }
+    };
 
     findCourseById = courseId =>
         this.courses = this.courses.find(
             course => course.id === courseId
-        )
+        );
 
     findAllCourses = () =>
         this.courses;
@@ -29,12 +29,12 @@ class CourseService {
     deleteCourse = deleteCourse =>
         this.courses = this.courses.filter(
             course => course.id !== deleteCourse.id
-        )
+        );
 
     updateCourse = (course, updateCourseFld) => {
-        course.title = updateCourseFld
+        course.title = updateCourseFld;
         return this.courses
-    }
+    };
 
     addModule = (course, module) => {
         if (module === null) {
@@ -44,20 +44,20 @@ class CourseService {
                 lessons: [{topics: [{}]}]
             }
         }
-        module.id = (new Date()).getTime()
-        course.modules.push(module)
+        module.id = (new Date()).getTime();
+        course.modules.push(module);
         return course.modules
-    }
+    };
 
     deleteModule = (course, deleteModule) =>
         course.modules = course.modules.filter(
             module => module.id !== deleteModule.id
-        )
+        );
 
     updateModule = (course, module, updateModuleFld) => {
-        module.title = updateModuleFld
+        module.title = updateModuleFld;
         return course.modules
-    }
+    };
 
     addLesson = (module, lesson) => {
         if (lesson === null) {
@@ -67,20 +67,20 @@ class CourseService {
                 topics: [{}]
             }
         }
-        lesson.id = (new Date()).getTime()
-        module.lessons.push(lesson)
+        lesson.id = (new Date()).getTime();
+        module.lessons.push(lesson);
         return module.lessons
-    }
+    };
 
     deleteLesson = (module, deleteLesson) =>
         module.lessons = module.lessons.filter(
             lesson => lesson.id !== deleteLesson.id
-        )
+        );
 
     updateLesson = (module, lesson, updateLessonFld) => {
-        lesson.title = updateLessonFld
+        lesson.title = updateLessonFld;
         return module.lessons
-    }
+    };
 
     addTopic = (lesson, topic) => {
         if (topic === null) {
@@ -89,18 +89,18 @@ class CourseService {
                 title: 'New Topic'
             }
         }
-        topic.id = (new Date()).getTime()
-        lesson.topics.push(topic)
+        topic.id = (new Date()).getTime();
+        lesson.topics.push(topic);
         return lesson.topics
-    }
+    };
 
     deleteTopic = (lesson, deleteTopic) =>
         lesson.topics = lesson.topics.filter(
             lesson => lesson.id !== deleteTopic.id
-        )
+        );
 
     updateTopic = (lesson, topic, updateTopicFld) => {
-        topic.title = updateTopicFld
+        topic.title = updateTopicFld;
         return lesson.topics
     }
 

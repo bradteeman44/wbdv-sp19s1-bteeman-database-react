@@ -11,9 +11,13 @@ class WhiteBoard extends Component {
         super();
         this.courseService = new CourseService()
         this.state = {
-            course: {title: 'New Course', modules: [{id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]}]},
+            course: {
+                title: 'New Course', modules: [{
+                    id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]
+                }]
+            },
             courses: this.courseService.findAllCourses(),
-            updateCourse: {title: ''}
+            updateCourseFld: ''
         }
 
         this.titleChanged = this.titleChanged.bind(this);
@@ -25,19 +29,24 @@ class WhiteBoard extends Component {
         })
     addCourse = () =>
         this.setState({
-            courses: this.courseService.addCourse(this.state.course)
+            courses: this.courseService.addCourse(this.state.course),
+            updateCourseFld: ''
         })
 
     updateCourse = course =>
         this.setState({
-            courses: this.props.courseService.updateCourse(this.props.course, course, this.state.updateCourse)
+            courses: this.props.courseService.updateCourse(this.props.course, course, this.state.updateCourse),
+            updateCourseFld: ''
         })
 
     titleChanged = (event) =>
         this.setState(
             {
-                course: {title: event.target.value},
-                updateCourse: {title: event.target.value}
+                course: {
+                    title: event.target.value,
+                    modules: [{id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]}]
+                },
+                updateCourseFld: event.target.value
             });
 
     render() {
@@ -76,13 +85,14 @@ class WhiteBoard extends Component {
                         type="text"
                         id="newCourseTitleFld"
                         placeholder="New Course Title"
+                        value={this.state.updateCourseFld}
                         onChange={this.titleChanged}/>
-                        <button
-                          className="btn btn-primary btn-circle"
-                          value="ADDCOURSEBTN"
-                          id="add" onClick={this.addCourse}>
-                            <i className="fa fa-plus"></i>
-                        </button>
+                    <button
+                        className="btn btn-primary btn-circle"
+                        value="ADDCOURSEBTN"
+                        id="add" onClick={this.addCourse}>
+                        <i className="fa fa-plus"></i>
+                    </button>
                 </nav>
                 <Router>
                     <div>

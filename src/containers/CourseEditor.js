@@ -19,7 +19,7 @@ class CourseEditor extends React.Component {
             selectedModule: course.modules[0],
             selectedLesson: course.modules[0].lessons[0],
             selectedTopic: course.modules[0].lessons[0].topics[0],
-            updateCourse: ''
+            updateCourseFld: ''
         }
     }
 
