@@ -4,8 +4,13 @@ import ModuleList from "../components/ModuleList";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
 import CourseEditorStyle from "../styling/CourseEditorStyle.css"
-import WidgetList from "../components/WidgetList";
+import widgetReducer from '../reducers/WidgetReducer'
 import {Link} from 'react-router-dom'
+import WidgetListContainer from "./WidgetListContainer";
+import {createStore} from 'redux'
+import {Provider} from "react-redux";
+
+const store = createStore(widgetReducer);
 
 class CourseEditor extends React.Component {
     constructor(props) {
@@ -108,7 +113,9 @@ class CourseEditor extends React.Component {
                             selectTopic={this.selectTopic}
                             selectedTopic={this.state.selectedTopic}
                             courseService={this.courseService}/>
-                        <WidgetList/>
+                        <Provider store={store}>
+                            <WidgetListContainer/>
+                        </Provider>
                     </div>
                 </div>
             </div>

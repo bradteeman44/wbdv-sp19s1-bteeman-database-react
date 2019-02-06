@@ -1,6 +1,40 @@
 import React from 'react'
+import WidgetComponent from './WidgetComponent'
 
-const WidgetList = () =>
+const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget}) =>
+    <div id="widgetListAll">
+        <div className="container-fluid" id="savePreviewBar">
+            <div className="row justify-content-end">
+                <button className="btn btn-success" id="saveBtn">Save</button>
+                <div id="previewBtn">
+                    Preview: <label> <input name="a" type="radio"/> Yes
+                </label> <label> <input name="a" type="radio" checked/> No
+                </label>
+                </div>
+            </div>
+        </div>
+        <div className="list-group">
+            {
+                widgets.map(widget =>
+                    <WidgetComponent
+                        key={widget.id}
+                        updateWidget={updateWidget}
+                        deleteWidget={deleteWidget}
+                        widget={widget}/>
+                )
+            }
+            <button
+                className="btn btn-primary"
+                value="ADDWIDGETBTN"
+                id="addWidgetBtn"
+                onClick={addWidget}>
+                <i className="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+
+export default WidgetList
+    /**
     <div id="widgetListAll">
         <div className="container-fluid" id="savePreviewBar">
             <div className="row justify-content-end">
@@ -294,7 +328,4 @@ const WidgetList = () =>
                 value="ADDWIDGETBTN" id="addWidgetBtn">
             <i className="fa fa-plus"></i>
         </button>
-    </div>
-
-
-export default WidgetList;
+    </div>*/

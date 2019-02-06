@@ -53,6 +53,21 @@ h6 {
     padding: 10px;
 }
 
+#imageURLFld{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#previewText {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#widgetNameFld {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 #paraTextFld {
     resize: vertical;
 }
@@ -62,11 +77,13 @@ h6 {
 }
 
 #headingSize {
-    margin-left: -7.5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #headingSizeSel {
-    margin-left: -7.5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #listType {
@@ -77,35 +94,7 @@ h6 {
     margin-left: -7.5px;
 }
 
-#widgetHeading {
-    border: 5px solid black;
-    padding: 50px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-#widgetPara {
-    border: 5px solid black;
-    padding: 50px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-#widgetList {
-    border: 5px solid black;
-    padding: 50px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-#widgetImg {
-    border: 5px solid black;
-    padding: 50px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-#widgetLink {
+#widgetComponent {
     border: 5px solid black;
     padding: 50px;
     margin-top: 10px;
@@ -167,8 +156,7 @@ h6 {
 }
 
 #addWidgetBtn {
-    margin-bottom: 30px;
-    background-color: red;
+    background-color: steelblue;
 }
 
 #courseEditor {
