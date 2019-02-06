@@ -13,11 +13,36 @@
             "topics": [
               {
                 "id": 1,
-                "title": "jQuery 1.1"
+                "title": "jQuery 1.1",
+                "widgets": [
+                  {
+                    "type": "HEADING",
+                    "size": 1,
+                    "text": "The Document Object Model"
+                  },
+                  {
+                    "type": "PARAGRAPH",
+                    "text": "This topic introduces the DOM"
+                  },
+                  {
+                    "type": "LIST",
+                    "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
+                  },
+                  {
+                    "type": "IMAGE",
+                    "src": "https://picsum.photos/200"
+                  },
+                  {
+                    "type": "LINK",
+                    "title": "The DOM",
+                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
+                  }
+                ]
               },
               {
                 "id": 2,
-                "title": "jQuery 1.2"
+                "title": "jQuery 1.2",
+                "widgets": []
               }
             ]
           },
@@ -27,11 +52,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "jQuery 2.1"
+                "title": "jQuery 2.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "jQuery 2.2"
+                "title": "jQuery 2.2",
+                "widgets": []
               }
             ]
           }
@@ -47,11 +74,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "Topic React 3.1"
+                "title": "Topic React 3.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "Topic React 3.2"
+                "title": "Topic React 3.2",
+                "widgets": []
               }
             ]
           },
@@ -61,11 +90,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "React 4.1"
+                "title": "React 4.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "React 4.2"
+                "title": "React 4.2",
+                "widgets": []
               }
             ]
           }
@@ -87,11 +118,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "SQL 1.1"
+                "title": "SQL 1.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "SQL 1.2"
+                "title": "SQL 1.2",
+                "widgets": []
               }
             ]
           },
@@ -101,11 +134,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "SQL 2.1"
+                "title": "SQL 2.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "SQL 2.2"
+                "title": "SQL 2.2",
+                "widgets": []
               }
             ]
           }
@@ -121,11 +156,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "JPA 1.1"
+                "title": "JPA 1.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "JPA 1.2"
+                "title": "JPA 1.2",
+                "widgets": []
               }
             ]
           },
@@ -135,11 +172,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "JPA 2.1"
+                "title": "JPA 2.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "JPA 2.2"
+                "title": "JPA 2.2",
+                "widgets": []
               }
             ]
           }
@@ -161,11 +200,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "Agile 1.1"
+                "title": "Agile 1.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "Agile 1.2"
+                "title": "Agile 1.2",
+                "widgets": []
               }
             ]
           },
@@ -175,11 +216,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "Agile 2.1"
+                "title": "Agile 2.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "Agile 2.2"
+                "title": "Agile 2.2",
+                "widgets": []
               }
             ]
           }
@@ -195,11 +238,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "Testing 1.1"
+                "title": "Testing 1.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "Testing 1.2"
+                "title": "Testing 1.2",
+                "widgets": []
               }
             ]
           },
@@ -209,11 +254,13 @@
             "topics": [
               {
                 "id": 1,
-                "title": "Testing 2.1"
+                "title": "Testing 2.1",
+                "widgets": []
               },
               {
                 "id": 2,
-                "title": "Testing 2.2"
+                "title": "Testing 2.2",
+                "widgets": []
               }
             ]
           }

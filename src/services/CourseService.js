@@ -104,6 +104,26 @@ class CourseService {
         return lesson.topics
     }
 
+    createWidget = (topicId, widget) => {
+
+    }
+
+    findWidgets = (topicId) => {
+
+    }
+
+    findWidget = (widgetId) => {
+
+    }
+
+    updateWidget = (widgetId, widget) => {
+
+    }
+
+    deleteWidget = (widgetId) => {
+
+    }
+
 }
 
 export default CourseService
