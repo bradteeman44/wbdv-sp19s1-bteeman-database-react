@@ -16,7 +16,7 @@ const ImageWidget = ({widget, updateWidget}) =>
                className="form-control wbdv-widgetName-fld"
                id="widgetNameFld"
                placeholder="Widget name"/>
-        <h4>Preview</h4>
+        <h4 id="previewText">Preview</h4>
         <div className="wbdv-preview-img">
             <img alt="Image"
                 src={widget.url}>
