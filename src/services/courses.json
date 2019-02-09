@@ -30,12 +30,12 @@
                   },
                   {
                     "type": "IMAGE",
-                    "src": "https://picsum.photos/200"
+                    "url": "https://picsum.photos/200"
                   },
                   {
                     "type": "LINK",
                     "title": "The DOM",
-                    "href": "https://en.wikipedia.org/wiki/Document_Object_Model"
+                    "url": "https://en.wikipedia.org/wiki/Document_Object_Model"
                   }
                 ]
               },

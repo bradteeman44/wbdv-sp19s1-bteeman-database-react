@@ -73,7 +73,13 @@ h6 {
 }
 
 #listTextFld {
-    resize: vertical;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#linkTextFld {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #headingSize {
@@ -86,12 +92,9 @@ h6 {
     margin-bottom: 20px;
 }
 
-#listType {
-    margin-left: -7.5px;
-}
-
 #listTypeSel {
-    margin-left: -7.5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #widgetComponent {

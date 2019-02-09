@@ -1,7 +1,7 @@
 import React from 'react'
 import WidgetComponent from './WidgetComponent'
 
-const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget}) =>
+const WidgetList = ({widgets, addWidget, deleteWidget, updateWidget, loadWidgets}) =>
     <div id="widgetListAll">
         <div className="container-fluid" id="savePreviewBar">
             <div className="row justify-content-end">

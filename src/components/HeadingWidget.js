@@ -28,7 +28,12 @@ const HeadingWidget = ({widget, updateWidget}) =>
         <input type="text"
                className="form-control wbdv-widgetName-fld"
                id="widgetNameFld"
-               placeholder="Widget name"/>
+               placeholder="Widget name"
+               value={widget.title}
+               onChange={event => {
+                   widget.title = event.target.value
+                   updateWidget(widget)
+               }}/>
         <h4 id="previewText">Preview</h4>
         {
             widget.size === 1 && <h1>{widget.text}</h1> ||

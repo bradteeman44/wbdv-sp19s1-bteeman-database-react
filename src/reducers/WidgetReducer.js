@@ -1,3 +1,5 @@
+import CourseService from "../services/CourseService";
+
 const widgets =
     {
         widgets: [
@@ -17,8 +19,11 @@ const widgets =
         ]
     }
 
-const widgetReducer = (state = widgets, action) => {
+const widgetReducer = (state = {widgets: []}, action) => {
+    this.courseService = new CourseService();
     switch (action.type) {
+        case 'LOAD_WIDGETS':
+            return state.widgets = Object.assign([], action.widgets);
         case 'CREATE_WIDGET':
             return {
                 widgets: [
@@ -46,6 +51,7 @@ const widgetReducer = (state = widgets, action) => {
             return
         case 'FIND_ALL_WIDGETS':
             return
+        default:
 
     }
     return state;

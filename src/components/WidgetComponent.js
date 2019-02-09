@@ -1,6 +1,9 @@
 import React from 'react'
 import HeadingWidget from './HeadingWidget'
 import ImageWidget from './ImageWidget'
+import ParagraphWidget from "./ParagraphWidget";
+import ListWidget from "./ListWidget";
+import LinkWidget from "./LinkWidget";
 
 const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
     <div className="container-fluid wbdv-widget" id="widgetComponent">
@@ -27,7 +30,10 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
                     value={widget.type}
                     id="role">
                     <option value="HEADING">Heading</option>
+                    <option value="PARAGRAPH">Paragraph</option>
+                    <option value="LIST">List</option>
                     <option value="IMAGE">Image</option>
+                    <option value="LINK">Link</option>
                 </select>
             </div>
             <div className="col-sm-1-content-end">
@@ -45,6 +51,18 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
                 widget={widget}/> ||
             widget.type === 'IMAGE' &&
             <ImageWidget
+                updateWidget={updateWidget}
+                widget={widget}/> ||
+            widget.type === 'PARAGRAPH' &&
+            <ParagraphWidget
+                updateWidget={updateWidget}
+                widget={widget}/> ||
+            widget.type === 'LIST' &&
+            <ListWidget
+                updateWidget={updateWidget}
+                widget={widget}/> ||
+            widget.type === 'LINK' &&
+            <LinkWidget
                 updateWidget={updateWidget}
                 widget={widget}/>
         }

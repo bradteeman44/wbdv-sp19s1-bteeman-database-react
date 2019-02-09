@@ -114,7 +114,8 @@ class CourseEditor extends React.Component {
                             selectedTopic={this.state.selectedTopic}
                             courseService={this.courseService}/>
                         <Provider store={store}>
-                            <WidgetListContainer/>
+                            <WidgetListContainer
+                                widgets={this.state.selectedTopic.widgets}/>
                         </Provider>
                     </div>
                 </div>
