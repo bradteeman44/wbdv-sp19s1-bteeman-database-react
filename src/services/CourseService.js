@@ -41,7 +41,7 @@ class CourseService {
             module = {
                 id: (new Date()).getTime(),
                 title: 'New Module',
-                lessons: [{topics: [{}]}]
+                lessons: [{topics: [{widgets: [{}]}]}]
             }
         }
         module.id = (new Date()).getTime();
@@ -64,7 +64,7 @@ class CourseService {
             lesson = {
                 id: (new Date()).getTime(),
                 title: 'New Lesson',
-                topics: [{}]
+                topics: [{widgets: [{}]}]
             }
         }
         lesson.id = (new Date()).getTime();
@@ -86,7 +86,8 @@ class CourseService {
         if (topic === null) {
             topic = {
                 id: (new Date()).getTime(),
-                title: 'New Topic'
+                title: 'New Topic',
+                widgets: [{}]
             }
         }
         topic.id = (new Date()).getTime();
@@ -108,8 +109,8 @@ class CourseService {
 
     }
 
-    findWidgets = (topicId) => {
-
+    findWidgets = (topic) => {
+        return topic.widgets
     }
 
     findWidget = (widgetId) => {

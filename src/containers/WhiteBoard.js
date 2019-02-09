@@ -9,11 +9,11 @@ import CourseEditor from "./CourseEditor";
 class WhiteBoard extends Component {
     constructor() {
         super();
-        this.courseService = new CourseService()
+        this.courseService = new CourseService();
         this.state = {
             course: {
                 title: 'New Course', modules: [{
-                    id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]
+                    id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: '', widgets: [{}]}]}]
                 }]
             },
             courses: this.courseService.findAllCourses(),

@@ -6,7 +6,7 @@ class TopicPills extends React.Component {
         super(props)
 
         this.state = {
-            topic: {title: 'New Topic'},
+            topic: {title: 'New Topic', widgets: [{}]},
             topics: this.props.topics,
             updateTopicFld: ''
         };

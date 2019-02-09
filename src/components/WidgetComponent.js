@@ -5,18 +5,24 @@ import ParagraphWidget from "./ParagraphWidget";
 import ListWidget from "./ListWidget";
 import LinkWidget from "./LinkWidget";
 
-const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
+const WidgetComponent = ({widget, viewMode, deleteWidget, updateWidget, moveUp, moveDown}) =>
     <div className="container-fluid wbdv-widget" id="widgetComponent">
         <div className="row">
             <div className="col-sm-4">
             </div>
             <div className="col-sm-1-content-end">
-                <button className="btn" id="arrowBtnUp">
+                <button
+                    className="btn"
+                    id="arrowBtnUp"
+                    onClick={() => {moveUp(widget)}}>
                     <i className="fa fa-arrow-up"></i>
                 </button>
             </div>
             <div className="col-sm-1-content-end">
-                <button className="btn" id="arrowBtnDown">
+                <button
+                    className="btn"
+                    id="arrowBtnDown"
+                    onClick={() => {moveDown(widget)}}>
                     <i className="fa fa-arrow-down"></i>
                 </button>
             </div>
@@ -48,23 +54,28 @@ const WidgetComponent = ({widget, deleteWidget, updateWidget}) =>
             widget.type === 'HEADING' &&
             <HeadingWidget
                 updateWidget={updateWidget}
-                widget={widget}/> ||
+                widget={widget}
+                viewMode={viewMode}/> ||
             widget.type === 'IMAGE' &&
             <ImageWidget
                 updateWidget={updateWidget}
-                widget={widget}/> ||
+                widget={widget}
+                viewMode={viewMode}/> ||
             widget.type === 'PARAGRAPH' &&
             <ParagraphWidget
                 updateWidget={updateWidget}
-                widget={widget}/> ||
+                widget={widget}
+                viewMode={viewMode}/> ||
             widget.type === 'LIST' &&
             <ListWidget
                 updateWidget={updateWidget}
-                widget={widget}/> ||
+                widget={widget}
+                viewMode={viewMode}/> ||
             widget.type === 'LINK' &&
             <LinkWidget
                 updateWidget={updateWidget}
-                widget={widget}/>
+                widget={widget}
+                viewMode={viewMode}/>
         }
     </div>
 

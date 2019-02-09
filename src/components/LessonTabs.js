@@ -6,7 +6,7 @@ class LessonTabs extends React.Component {
         super(props)
 
         this.state = {
-            lesson: {title: 'New Lesson', topics: [{}]},
+            lesson: {title: 'New Lesson', topics: [{widgets: [{}]}]},
             lessons: this.props.lessons,
             updateLessonFld: ''
         };

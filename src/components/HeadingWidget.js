@@ -1,7 +1,7 @@
 import React from 'react'
 
-const HeadingWidget = ({widget, updateWidget}) =>
-    <div>
+const HeadingWidget = ({widget, viewMode, updateWidget}) =>
+    <div style={{display: viewMode === "EDIT" ? 'none' : 'block'}}>
         <h3>Heading Widget</h3>
         <input
             value={widget.text}

@@ -16,9 +16,9 @@ class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = new CourseService();
-        const courseId = parseInt(props.match.params.id);
-        const course = this.courseService.findCourseById(courseId);
+        let courseId = parseInt(props.match.params.id);
         console.log(courseId);
+        let course = this.courseService.findCourseById(courseId);
         this.state = {
             course: course,
             selectedModule: course.modules[0],
@@ -115,7 +115,7 @@ class CourseEditor extends React.Component {
                             courseService={this.courseService}/>
                         <Provider store={store}>
                             <WidgetListContainer
-                                widgets={this.state.selectedTopic.widgets}/>
+                                topic={this.state.selectedTopic}/>
                         </Provider>
                     </div>
                 </div>

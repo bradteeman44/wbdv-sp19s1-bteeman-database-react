@@ -6,7 +6,7 @@ class ModuleList extends React.Component {
         super(props)
 
         this.state = {
-            module: {title: 'New Module', lessons: [{topics: [{}]}]},
+            module: {title: 'New Module', lessons: [{topics: [{widgets: [{}]}]}]},
             modules: this.props.modules,
             updateModuleFld: ''
         };

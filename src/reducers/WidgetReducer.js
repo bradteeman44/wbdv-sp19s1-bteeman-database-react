@@ -1,34 +1,21 @@
 import CourseService from "../services/CourseService";
 
-const widgets =
-    {
-        widgets: [
-            {
-                id: 123,
-                title: 'Widget 1',
-                type: 'HEADING',
-                text: 'This is a heading',
-                size: 2
-            },
-            {
-                id: 234,
-                title: 'Widget 2',
-                type: 'IMAGE',
-                url: 'http://scd.france24.com/en/files/imagecache/france24_ct_api_bigger_169/article/image/BOLT-M_1.jpg'
-            }
-        ]
-    }
+const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action) => {
+    const service = new CourseService();
 
-const widgetReducer = (state = {widgets: []}, action) => {
-    this.courseService = new CourseService();
     switch (action.type) {
-        case 'LOAD_WIDGETS':
-            return state.widgets = Object.assign([], action.widgets);
+        case 'NEW_TOPIC':
+            console.log(state)
+            return{
+                topic: action.topic,
+                widgets: service.findWidgets(action.topic),
+            }
         case 'CREATE_WIDGET':
             return {
                 widgets: [
                     ...state.widgets,
                     {
+                        id: (new Date()).getTime(),
                         type: 'HEADING',
                         text: 'New Widget',
                         size: 1
@@ -45,6 +32,18 @@ const widgetReducer = (state = {widgets: []}, action) => {
                     widget.id === action.widget.id ? action.widget : widget
                 )
             }
+        case 'MOVE_UP':
+            let index = state.indexOf(action.widget);
+            state.move(index, index - 1);
+            return state.splice(0);
+        case 'MOVE_DOWN':
+            return
+        case 'UPDATE_VIEW_MODE':
+            if(action.viewMode === 'EDIT') {
+                return {viewMode: 'PREVIEW'}
+            } else {
+                return {viewMode: 'EDIT'}
+            }
         case 'FIND_WIDGET':
             return
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
@@ -52,9 +51,9 @@ const widgetReducer = (state = {widgets: []}, action) => {
         case 'FIND_ALL_WIDGETS':
             return
         default:
-
+            return state;
     }
-    return state;
+
 }
 
 export default widgetReducer;
