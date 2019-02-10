@@ -109,6 +109,11 @@ class CourseService {
 
     }
 
+    saveWidgets = (topic, widgets) => {
+        topic.widgets = widgets;
+        return topic.widgets
+    }
+
     findWidgets = (topic) => {
         return topic.widgets
     }

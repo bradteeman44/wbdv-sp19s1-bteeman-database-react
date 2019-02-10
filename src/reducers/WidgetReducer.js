@@ -38,12 +38,38 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
                 topic: state.topic,
                 viewMode: state.viewMode
             }
+        case 'SAVE_WIDGETS':
+            return {
+                widgets: service.saveWidgets(state.topic, action.widgets),
+                topic: state.topic,
+                viewMode: state.viewMode
+            }
         case 'MOVE_UP':
-            let index = state.indexOf(action.widget);
-            state.move(index, index - 1);
-            return state.splice(0);
+            Array.prototype.move
+                = function (from, to) {
+                this.splice(to, 0, this.splice(from, 1)[0]);
+            };
+            let indexUp = state.widgets.indexOf(action.widget);
+            console.log(indexUp)
+            state.widgets.move(indexUp, indexUp - 1);
+            return {
+                widgets: state.widgets.splice(0),
+                topic: state.topic,
+                viewMode: state.viewMode
+            }
         case 'MOVE_DOWN':
-            return
+            Array.prototype.move
+                = function (from, to) {
+                this.splice(to, 0, this.splice(from, 1)[0]);
+            };
+            let indexDown = state.widgets.indexOf(action.widget);
+            console.log(indexDown)
+            state.widgets.move(indexDown, indexDown - 1);
+            return {
+                widgets: state.widgets.splice(0),
+                topic: state.topic,
+                viewMode: state.viewMode
+            }
         case 'UPDATE_VIEW_MODE':
             console.log(state);
             return {

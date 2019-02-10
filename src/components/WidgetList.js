@@ -1,7 +1,7 @@
 import React from 'react'
 import WidgetComponent from './WidgetComponent'
 
-const WidgetList = ({widgets, topicPrevious,  topicActual, newTopic, addWidget, deleteWidget, updateWidget, moveUp, moveDown, updateViewMode, viewMode}) => {
+const WidgetList = ({widgets, topicPrevious,  topicActual, newTopic, addWidget, deleteWidget, updateWidget, moveUp, moveDown, updateViewMode, saveWidgets, viewMode}) => {
     console.log(widgets)
     if (topicPrevious !== undefined){
         if (topicActual.id !== topicPrevious.id){
@@ -13,7 +13,14 @@ const WidgetList = ({widgets, topicPrevious,  topicActual, newTopic, addWidget, 
         <div id="widgetListAll">
             <div className="container-fluid" id="savePreviewBar">
                 <div className="row justify-content-end">
-                    <button className="btn btn-success" id="saveBtn">Save</button>
+                    <button
+                        className="btn btn-success"
+                        onClick={() => {
+                            saveWidgets(widgets)
+                            console.log(widgets)}}
+                        id="saveBtn">
+                        Save
+                    </button>
                     <div id="previewBtn">
                         Preview:
                         <label>

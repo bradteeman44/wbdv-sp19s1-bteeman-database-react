@@ -43,6 +43,11 @@ const dispatchToPropertyMapper = dispatch => ({
         dispatch({
             type: 'UPDATE_VIEW_MODE',
             viewMode: viewMode
+        }),
+    saveWidgets: (widgets) =>
+        dispatch({
+            type: 'SAVE_WIDGETS',
+            widgets: widgets
         })
 })
 
