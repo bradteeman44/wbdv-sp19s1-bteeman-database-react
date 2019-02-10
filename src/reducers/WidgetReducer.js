@@ -9,6 +9,7 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
             return{
                 topic: action.topic,
                 widgets: service.findWidgets(action.topic),
+                viewMode: state.viewMode
             }
         case 'CREATE_WIDGET':
             return {
@@ -20,17 +21,22 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
                         text: 'New Widget',
                         size: 1
                     }
-                ]
+                ],
+                topic: state.topic,
+                viewMode: state.viewMode
             }
         case 'DELETE_WIDGET':
             return {
-                widgets: state.widgets.filter(widget => widget.id !== action.widget.id)
+                widgets: state.widgets.filter(widget => widget.id !== action.widget.id),
+                topic: state.topic,
+                viewMode: state.viewMode
             }
         case 'UPDATE_WIDGET':
             return {
                 widgets: state.widgets.map(widget =>
-                    widget.id === action.widget.id ? action.widget : widget
-                )
+                    widget.id === action.widget.id ? action.widget : widget),
+                topic: state.topic,
+                viewMode: state.viewMode
             }
         case 'MOVE_UP':
             let index = state.indexOf(action.widget);
@@ -39,11 +45,11 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
         case 'MOVE_DOWN':
             return
         case 'UPDATE_VIEW_MODE':
-            if(action.viewMode === 'EDIT') {
-                return {viewMode: 'PREVIEW'}
-            } else {
-                return {viewMode: 'EDIT'}
-            }
+            console.log(state);
+            return {
+                widgets: state.widgets,
+                topic: state.topic,
+                viewMode: action.viewMode}
         case 'FIND_WIDGET':
             return
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
@@ -53,7 +59,6 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
         default:
             return state;
     }
-
 }
 
 export default widgetReducer;

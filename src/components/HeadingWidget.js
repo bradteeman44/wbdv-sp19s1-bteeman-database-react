@@ -1,9 +1,20 @@
 import React from 'react'
 
-const HeadingWidget = ({widget, viewMode, updateWidget}) =>
-    <div style={{display: viewMode === "EDIT" ? 'none' : 'block'}}>
-        <h3>Heading Widget</h3>
+const HeadingWidget = ({widget, viewMode, updateWidget}) => {
+    console.log(viewMode);
+    if (viewMode === 'EDIT') {
+        widget.editing = true
+    } else {
+        widget.editing = false
+    }
+    return(
+    <div>
+        <h3
+            style={{display: widget.editing ? 'block' : 'none'}}>
+            Heading Widget
+        </h3>
         <input
+            style={{display: widget.editing ? 'block' : 'none'}}
             value={widget.text}
             onChange={event => {
                 widget.text = event.target.value
@@ -13,6 +24,7 @@ const HeadingWidget = ({widget, viewMode, updateWidget}) =>
             id="headingTextFld"
             placeholder="Heading text"/>
         <select
+            style={{display: widget.editing ? 'block' : 'none'}}
             onChange={event => {
                 widget.size = parseInt(event.target.value)
                 updateWidget(widget)
@@ -26,6 +38,7 @@ const HeadingWidget = ({widget, viewMode, updateWidget}) =>
             <option value="5">Heading 5</option>
         </select>
         <input type="text"
+               style={{display: widget.editing ? 'block' : 'none'}}
                className="form-control wbdv-widgetName-fld"
                id="widgetNameFld"
                placeholder="Widget name"
@@ -34,7 +47,10 @@ const HeadingWidget = ({widget, viewMode, updateWidget}) =>
                    widget.title = event.target.value
                    updateWidget(widget)
                }}/>
-        <h4 id="previewText">Preview</h4>
+        <h4 id="previewText"
+            style={{display: widget.editing ? 'block' : 'none'}}>
+            Preview
+        </h4>
         {
             widget.size === 1 && <h1>{widget.text}</h1> ||
             widget.size === 2 && <h2>{widget.text}</h2> ||
@@ -43,5 +59,7 @@ const HeadingWidget = ({widget, viewMode, updateWidget}) =>
             widget.size === 5 && <h5>{widget.text}</h5>
         }
     </div>
+    )
+}
 
 export default HeadingWidget

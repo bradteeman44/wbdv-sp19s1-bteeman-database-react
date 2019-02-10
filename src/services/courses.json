@@ -19,7 +19,8 @@
                     "id": 1,
                     "type": "HEADING",
                     "size": 1,
-                    "text": "The Document Object Model"
+                    "text": "The Document Object Model",
+                    "editing": true
                   },
                   {
                     "id": 2,

@@ -39,7 +39,7 @@ const dispatchToPropertyMapper = dispatch => ({
             type: 'UPDATE_WIDGET',
             widget: widget
         }),
-    updateViewMode: viewMode =>
+    updateViewMode: (viewMode) =>
         dispatch({
             type: 'UPDATE_VIEW_MODE',
             viewMode: viewMode

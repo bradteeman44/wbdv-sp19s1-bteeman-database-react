@@ -2,6 +2,7 @@ import React from 'react'
 import WidgetComponent from './WidgetComponent'
 
 const WidgetList = ({widgets, topicPrevious,  topicActual, newTopic, addWidget, deleteWidget, updateWidget, moveUp, moveDown, updateViewMode, viewMode}) => {
+    console.log(widgets)
     if (topicPrevious !== undefined){
         if (topicActual.id !== topicPrevious.id){
             console.log("newTopic was called")
@@ -14,9 +15,31 @@ const WidgetList = ({widgets, topicPrevious,  topicActual, newTopic, addWidget, 
                 <div className="row justify-content-end">
                     <button className="btn btn-success" id="saveBtn">Save</button>
                     <div id="previewBtn">
-                        Preview: <label> <input name="a" type="radio" checked onChange={() => {updateViewMode(viewMode)}}/> Yes
-                    </label> <label> <input name="a" type="radio" /> No
-                    </label>
+                        Preview:
+                        <label>
+                            <input
+                                name="a"
+                                type="radio"
+                                value="PREVIEW"
+                                onClick={(event) => {
+                                    console.log("function called")
+                                    viewMode = event.target.value
+                                    console.log(viewMode)
+                                    updateViewMode(viewMode)}}/>
+                                    Yes
+                        </label>
+                        <label>
+                            <input
+                                name="a"
+                                type="radio"
+                                value="EDIT"
+                                onClick={(event) => {
+                                    console.log("function called")
+                                    viewMode = event.target.value
+                                    console.log(viewMode)
+                                    updateViewMode(viewMode)}}/>
+                                    No
+                        </label>
                     </div>
                 </div>
             </div>
