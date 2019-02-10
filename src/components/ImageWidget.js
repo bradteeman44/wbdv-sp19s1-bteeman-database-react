@@ -2,12 +2,7 @@ import React from 'react'
 
 const ImageWidget = ({widget, viewMode, updateWidget}) => {
     console.log(viewMode);
-    if (viewMode === 'EDIT') {
-        widget.editing = true
-    } else {
-        widget.editing = false
-    }
-
+    widget.editing = viewMode === 'EDIT';
     return (
         <div>
             <h3

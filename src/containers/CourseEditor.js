@@ -69,14 +69,14 @@ class CourseEditor extends React.Component {
                         id="tableBtn"
                         className="btn-lg float-left btn-dark"
                         to={`/table`}><i className="fa fa-list"></i></Link>
-                        Course Editor: {this.state.course.title}
+                    Course Editor: {this.state.course.title}
                     <span className="float-right">
                     <input
                         className="form-control"
                         type="text"
                         id="editCourseTitleFld"
                         placeholder="Edit Course Title"
-                        value = {this.state.updateCourseFld}
+                        value={this.state.updateCourseFld}
                         onChange={this.titleChanged}/>
                     <button
                         id="courseEditBtn"

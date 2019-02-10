@@ -2,11 +2,7 @@ import React from 'react'
 
 const ParagraphWidget = ({widget, viewMode, updateWidget}) => {
     console.log(viewMode);
-    if (viewMode === 'EDIT') {
-        widget.editing = true
-    } else {
-        widget.editing = false
-    }
+    widget.editing = viewMode === 'EDIT';
     return (
         <div>
             <h3
@@ -47,7 +43,7 @@ const ParagraphWidget = ({widget, viewMode, updateWidget}) => {
                 id="paraTextFld"
                 rows="5"
                 cols="200">
-        </textarea>
+            </textarea>
         </div>
     )
 }

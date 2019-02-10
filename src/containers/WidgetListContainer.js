@@ -10,6 +10,11 @@ const stateToPropertyMapper = (state, ownProps) => ({
 })
 
 const dispatchToPropertyMapper = dispatch => ({
+    loadWidgets: (topic) =>
+        dispatch({
+            type: 'LOAD_WIDGETS',
+            topic: topic
+        }),
     moveUp: (widget) =>
         dispatch({
             type: 'MOVE_UP',
@@ -19,11 +24,6 @@ const dispatchToPropertyMapper = dispatch => ({
         dispatch({
             type: 'MOVE_DOWN',
             widget: widget
-        }),
-    newTopic: (topic) =>
-        dispatch({
-            type: 'NEW_TOPIC',
-            topic: topic
         }),
     deleteWidget: widget =>
         dispatch({
@@ -47,6 +47,20 @@ const dispatchToPropertyMapper = dispatch => ({
     saveWidgets: (widgets) =>
         dispatch({
             type: 'SAVE_WIDGETS',
+            widgets: widgets
+        }),
+    findWidget: (widget) =>
+        dispatch({
+            type: 'FIND_WIDGET',
+            widget: widget
+        }),
+    findAllWidgets: () =>
+        dispatch({
+            type: 'FIND_ALL_WIDGETS'
+        }),
+    findAllWidgetsForTopic: (widgets) =>
+        dispatch({
+            type: 'FIND_ALL_WIDGETS_FOR_TOPIC',
             widgets: widgets
         })
 })

@@ -1,12 +1,12 @@
 import CourseService from "../services/CourseService";
 
-const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action) => {
+const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, action) => {
     const service = new CourseService();
 
     switch (action.type) {
-        case 'NEW_TOPIC':
+        case 'LOAD_WIDGETS':
             console.log(state)
-            return{
+            return {
                 topic: action.topic,
                 widgets: service.findWidgets(action.topic),
                 viewMode: state.viewMode
@@ -15,12 +15,7 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
             return {
                 widgets: [
                     ...state.widgets,
-                    {
-                        id: (new Date()).getTime(),
-                        type: 'HEADING',
-                        text: 'New Widget',
-                        size: 1
-                    }
+                    service.createWidget(state.topic)
                 ],
                 topic: state.topic,
                 viewMode: state.viewMode
@@ -75,13 +70,26 @@ const widgetReducer = (state = {widgets: [], topic:'', viewMode: 'EDIT'}, action
             return {
                 widgets: state.widgets,
                 topic: state.topic,
-                viewMode: action.viewMode}
+                viewMode: action.viewMode
+            }
         case 'FIND_WIDGET':
-            return
+            return {
+                widgets: service.findWidget(action.widget.id),
+                topic: state.topic,
+                viewMode: state.viewMode
+            }
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
-            return
+            return {
+                widgets: service.findWidgets(state.topic),
+                topic: state.topic,
+                viewMode: state.viewMode
+            }
         case 'FIND_ALL_WIDGETS':
-            return
+            return {
+                widgets: service.findAllWidgets,
+                topic: state.topic,
+                viewMode: state.viewMode
+            }
         default:
             return state;
     }

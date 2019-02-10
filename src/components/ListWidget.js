@@ -2,11 +2,7 @@ import React from 'react'
 
 const ListWidget = ({widget, viewMode, updateWidget}) => {
     console.log(viewMode);
-    if (viewMode === 'EDIT') {
-        widget.editing = true
-    } else {
-        widget.editing = false
-    }
+    widget.editing = viewMode === 'EDIT';
     return (
         <div>
             <h3
@@ -22,9 +18,7 @@ const ListWidget = ({widget, viewMode, updateWidget}) => {
                 }}
                 className="form-control"
                 id="listTextFld"
-                placeholder="Put each
-            item in
-            a separate row"
+                placeholder={"Put each\nitem in\na separate row"}
                 rows="5"
                 cols="200">
         </textarea>
@@ -57,11 +51,17 @@ const ListWidget = ({widget, viewMode, updateWidget}) => {
             {
                 widget.list === 'UNORDERED' &&
                 <ul>
-                    {widget.text}
+                    {widget.text.split("\n").map(list =>
+                        <li>
+                            {list}
+                        </li>)}
                 </ul> ||
                 widget.list === 'ORDERED' &&
                 <ol>
-                    {widget.text}
+                    {widget.text.split("\n").map(list =>
+                        <li>
+                            {list}
+                        </li>)}
                 </ol>
             }
         </div>

@@ -105,8 +105,19 @@ class CourseService {
         return lesson.topics
     }
 
-    createWidget = (topicId, widget) => {
-
+    createWidget = (topic) => {
+        console.log(topic.widgets)
+        const widget = {
+            id: (new Date()).getTime(),
+            title: 'New Widget',
+            text: 'New Widget',
+            size: 1,
+            editing: 'EDIT'
+        }
+        console.log(widget)
+        topic.widgets.push(widget);
+        console.log(topic.widgets)
+        return widget
     }
 
     saveWidgets = (topic, widgets) => {
@@ -118,16 +129,26 @@ class CourseService {
         return topic.widgets
     }
 
+    findAllWidgets = () => {
+        return this.widgets
+    }
+
     findWidget = (widgetId) => {
-
+        this.widgets = this.widgets.find(
+            widget => widget.id === widgetId
+        );
     }
 
-    updateWidget = (widgetId, widget) => {
-
+    updateWidget = (topic, widget, updateWidgetFld) => {
+        widget.title = updateWidgetFld;
+        return topic.widgets
     }
 
-    deleteWidget = (widgetId) => {
-
+    deleteWidget = (topic, deleteWidget) => {
+        console.log(topic.widgets)
+        topic.widgets = topic.widgets.filter(
+            widget => widget.id !== deleteWidget.id
+        );
     }
 
 }
