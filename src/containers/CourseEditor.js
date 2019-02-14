@@ -19,6 +19,7 @@ class CourseEditor extends React.Component {
         //let courseId = parseInt(props.match.params.id);
         let course = this.componentDidMount();
         this.state = {
+            courseId: '',
             course: course,
             selectedModule: course.modules[0],
             selectedLesson: course.modules[0].lessons[0],
@@ -29,10 +30,20 @@ class CourseEditor extends React.Component {
 
     componentDidMount() {
         console.log(parseInt(this.props.match.params.id));
+        this.selectCourse(parseInt(this.props.match.params.id))
+        /*
         this.courseService.findCourseById(parseInt(this.props.match.params.id))
             .then(course =>
                 this.setState({course: course}));
+                */
     }
+
+    selectCourse = courseId => {
+        console.log(courseId);
+        this.setState({courseId: courseId});
+    }
+
+
 
     updateCourse = course =>
         this.setState({

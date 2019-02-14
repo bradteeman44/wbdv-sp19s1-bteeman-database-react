@@ -24,21 +24,27 @@ class WhiteBoard extends Component {
     }
 
     componentDidMount() {
+        this.updateCourses();
+    }
+
+    updateCourses = () => {
         this.courseService.findAllCourses()
             .then(courses =>
                 this.setState({courses: courses}));
-    }
+    };
 
+    deleteCourse = course => {
+        this.courseService.deleteCourse(course);
+        this.setState({
+            courses: this.updateCourses()
+        })}
 
-    deleteCourse = course =>
+    addCourse = () => {
+        this.courseService.addCourse(this.state.course);
         this.setState({
-            courses: this.courseService.deleteCourse(course)
-        })
-    addCourse = () =>
-        this.setState({
-            courses: this.courseService.addCourse(this.state.course),
+            courses: this.updateCourses(),
             updateCourseFld: ''
-        })
+        })}
 
     updateCourse = course =>
         this.setState({

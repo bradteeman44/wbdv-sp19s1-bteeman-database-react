@@ -1,39 +1,41 @@
-import courses from './courses.json'
 
 class CourseService {
     COURSE_API_URL = "http://localhost:8080/api/courses/";
 
-    constructor() {
-        this.courses = courses;
-    }
-
-    addCourse = course => {
-        if (course === null) {
-            course = {
-                id: (new Date()).getTime(),
-                title: 'New Course',
-                modules: [{id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: ''}]}]}]
+    addCourse = course =>
+        fetch(this.COURSE_API_URL, {
+            method: 'post',
+            body: JSON.stringify(course),
+            headers: {
+                'content-type': 'application/json'
             }
-        }
-        course.id = (new Date()).getTime();
-        this.courses.push(course);
-        return this.courses
-    };
+        }).then(response => response.json());
 
     findCourseById = courseId =>
         fetch(this.COURSE_API_URL + courseId)
             .then(response => response.json()
-    );
+            );
 
     findAllCourses = () =>
         fetch(this.COURSE_API_URL).then(response => response.json());
 
-    deleteCourse = deleteCourse =>
-        fetch(this.COURSE_API_URL + deleteCourse.id).then(response => response.json());
+    deleteCourse = deleteCourse => {
+        console.log(deleteCourse.id);
+        fetch(this.COURSE_API_URL + deleteCourse.id, {
+            method: 'delete'
+        }).then(response => response.json());
+    }
 
     updateCourse = (course, updateCourseFld) => {
-        course.title = updateCourseFld;
-        return this.courses
+        fetch(this.COURSE_API_URL + course.id, {
+            method : 'put',
+            body : JSON.stringify(updateCourseFld),
+            headers : {
+                'content-type' : 'application/json'
+            }
+        }).then(function(response) {
+            return response.json();
+        })
     };
 
     addModule = (course, module) => {
