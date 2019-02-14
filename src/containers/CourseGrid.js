@@ -2,7 +2,10 @@ import React from 'react'
 import CourseCard from '../components/CourseCard'
 import {Link} from "react-router-dom";
 
-const CourseGrid = ({courses, deleteCourse}) =>
+const CourseGrid = ({courses, deleteCourse}) => {
+    console.log(courses)
+
+        return(
     <div id="courseGrid">
         <div
             className="container d-none d-md-block"
@@ -44,5 +47,8 @@ const CourseGrid = ({courses, deleteCourse}) =>
             }
         </div>
     </div>
+
+)
+}
 
 export default CourseGrid

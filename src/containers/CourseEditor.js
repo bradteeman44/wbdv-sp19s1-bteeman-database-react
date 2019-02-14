@@ -16,16 +16,22 @@ class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = new CourseService();
-        let courseId = parseInt(props.match.params.id);
-        console.log(courseId);
-        let course = this.courseService.findCourseById(courseId);
+        //let courseId = parseInt(props.match.params.id);
+        let course = this.componentDidMount();
         this.state = {
             course: course,
             selectedModule: course.modules[0],
             selectedLesson: course.modules[0].lessons[0],
-            selectedTopic: course.modules[0].lessons[0].topics[0],
+            selectedTopic:  course.modules[0].lessons[0].topics[0],
             updateCourseFld: ''
         }
+    }
+
+    componentDidMount() {
+        console.log(parseInt(this.props.match.params.id));
+        this.courseService.findCourseById(parseInt(this.props.match.params.id))
+            .then(course =>
+                this.setState({course: course}));
     }
 
     updateCourse = course =>

@@ -16,12 +16,19 @@ class WhiteBoard extends Component {
                     id: '', title: '', lessons: [{id: '', title: '', topics: [{id: '', title: '', widgets: [{}]}]}]
                 }]
             },
-            courses: this.courseService.findAllCourses(),
+            courses: [],
             updateCourseFld: ''
         }
 
         this.titleChanged = this.titleChanged.bind(this);
     }
+
+    componentDidMount() {
+        this.courseService.findAllCourses()
+            .then(courses =>
+                this.setState({courses: courses}));
+    }
+
 
     deleteCourse = course =>
         this.setState({

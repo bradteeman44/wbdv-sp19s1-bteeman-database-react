@@ -1,6 +1,8 @@
 import courses from './courses.json'
 
 class CourseService {
+    COURSE_API_URL = "http://localhost:8080/api/courses/";
+
     constructor() {
         this.courses = courses;
     }
@@ -19,17 +21,15 @@ class CourseService {
     };
 
     findCourseById = courseId =>
-        this.courses = this.courses.find(
-            course => course.id === courseId
-        );
+        fetch(this.COURSE_API_URL + courseId)
+            .then(response => response.json()
+    );
 
     findAllCourses = () =>
-        this.courses;
+        fetch(this.COURSE_API_URL).then(response => response.json());
 
     deleteCourse = deleteCourse =>
-        this.courses = this.courses.filter(
-            course => course.id !== deleteCourse.id
-        );
+        fetch(this.COURSE_API_URL + deleteCourse.id).then(response => response.json());
 
     updateCourse = (course, updateCourseFld) => {
         course.title = updateCourseFld;
