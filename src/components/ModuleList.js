@@ -27,11 +27,13 @@ class ModuleList extends React.Component {
             modules: this.props.courseService.deleteModule(this.props.course, module)
         })
 
-    updateModule = module =>
+    updateModule = module => {
+        module.title = this.state.updateModuleFld;
         this.setState({
-            modules: this.props.courseService.updateModule(this.props.course, module, this.state.updateModuleFld),
+            modules: this.props.courseService.updateModule(this.props.course, module),
             updateModuleFld: ''
         })
+    }
 
     titleChanged = (event) => {
         this.setState(

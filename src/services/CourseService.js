@@ -1,6 +1,8 @@
-
 class CourseService {
     COURSE_API_URL = "http://localhost:8080/api/courses/";
+    MODULE_API_URL = "http://localhost:8080/api/modules/";
+    LESSON_API_URL = "http://localhost:8080/api/lessons/";
+    TOPIC_API_URL = "http://localhost:8080/api/topics/";
 
     addCourse = course =>
         fetch(this.COURSE_API_URL, {
@@ -26,86 +28,128 @@ class CourseService {
         }).then(response => response.json());
     }
 
-    updateCourse = (course, updateCourseFld) => {
+    updateCourse = (course) => {
         fetch(this.COURSE_API_URL + course.id, {
-            method : 'put',
-            body : JSON.stringify(updateCourseFld),
-            headers : {
-                'content-type' : 'application/json'
+            method: 'put',
+            body: JSON.stringify(course),
+            headers: {
+                'content-type': 'application/json'
             }
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json();
         })
     };
 
+    findModuleById = moduleId =>
+        fetch(this.MODULE_API_URL + moduleId)
+            .then(response => response.json()
+            );
+
+    findAllModules = courseId =>
+        fetch(this.COURSE_API_URL + courseId + "/modules").then(response => response.json());
+
     addModule = (course, module) => {
-        if (module === null) {
-            module = {
-                id: (new Date()).getTime(),
-                title: 'New Module',
-                lessons: [{topics: [{widgets: [{}]}]}]
+        fetch(this.COURSE_API_URL + course.id + "/modules", {
+            method: 'post',
+            body: JSON.stringify(module),
+            headers: {
+                'content-type': 'application/json'
             }
-        }
-        module.id = (new Date()).getTime();
-        course.modules.push(module);
-        return course.modules
+        }).then(response => response.json());
     };
 
-    deleteModule = (course, deleteModule) =>
-        course.modules = course.modules.filter(
-            module => module.id !== deleteModule.id
-        );
+    deleteModule = (course, deleteModule) => {
+        console.log(deleteModule.id);
+        fetch(this.MODULE_API_URL + deleteModule.id, {
+            method: 'delete'
+        }).then(response => response.json());
+    }
 
-    updateModule = (course, module, updateModuleFld) => {
-        module.title = updateModuleFld;
-        return course.modules
+    updateModule = (course, module) => {
+        fetch(this.MODULE_API_URL + module.id, {
+            method: 'put',
+            body: JSON.stringify(module),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
     };
+
+    findLessoneById = lessonId =>
+        fetch(this.LESSON_API_URL + lessonId)
+            .then(response => response.json()
+            );
+
+    findAllLessons = moduleId =>
+        fetch(this.MODULE_API_URL + moduleId + "/lessons").then(response => response.json());
 
     addLesson = (module, lesson) => {
-        if (lesson === null) {
-            lesson = {
-                id: (new Date()).getTime(),
-                title: 'New Lesson',
-                topics: [{widgets: [{}]}]
+        fetch(this.MODULE_API_URL + module.id + "/lessons", {
+            method: 'post',
+            body: JSON.stringify(lesson),
+            headers: {
+                'content-type': 'application/json'
             }
-        }
-        lesson.id = (new Date()).getTime();
-        module.lessons.push(lesson);
-        return module.lessons
+        }).then(response => response.json());
     };
 
-    deleteLesson = (module, deleteLesson) =>
-        module.lessons = module.lessons.filter(
-            lesson => lesson.id !== deleteLesson.id
-        );
+    deleteLesson = (module, deleteLesson) => {
+        console.log(deleteLesson.id);
+        fetch(this.LESSON_API_URL + deleteLesson.id, {
+            method: 'delete'
+        }).then(response => response.json());
+    }
 
-    updateLesson = (module, lesson, updateLessonFld) => {
-        lesson.title = updateLessonFld;
-        return module.lessons
+    updateLesson = (module, lesson) => {
+        fetch(this.LESSON_API_URL + lesson.id, {
+            method: 'put',
+            body: JSON.stringify(lesson),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
     };
+
+    findTopicById = topicId =>
+        fetch(this.TOPIC_API_URL + topicId)
+            .then(response => response.json()
+            );
+
+    findAllTopics = lesson =>
+        fetch(this.LESSON_API_URL + lesson.id + "/topics").then(response => response.json());
 
     addTopic = (lesson, topic) => {
-        if (topic === null) {
-            topic = {
-                id: (new Date()).getTime(),
-                title: 'New Topic',
-                widgets: [{}]
+        fetch(this.LESSON_API_URL + lesson.id + "/topics", {
+            method: 'post',
+            body: JSON.stringify(topic),
+            headers: {
+                'content-type': 'application/json'
             }
-        }
-        topic.id = (new Date()).getTime();
-        lesson.topics.push(topic);
-        return lesson.topics
+        }).then(response => response.json());
     };
 
-    deleteTopic = (lesson, deleteTopic) =>
-        lesson.topics = lesson.topics.filter(
-            lesson => lesson.id !== deleteTopic.id
-        );
-
-    updateTopic = (lesson, topic, updateTopicFld) => {
-        topic.title = updateTopicFld;
-        return lesson.topics
+    deleteTopic = (lesson, deleteTopic) => {
+        console.log(deleteTopic.id);
+        fetch(this.TOPIC_API_URL + deleteTopic.id, {
+            method: 'delete'
+        }).then(response => response.json());
     }
+
+    updateTopic = (lesson, topic) => {
+        fetch(this.TOPIC_API_URL + topic.id, {
+            method: 'put',
+            body: JSON.stringify(topic),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        })
+    };
 
     createWidget = (topic) => {
         console.log(topic.widgets)

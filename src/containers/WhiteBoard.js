@@ -5,11 +5,16 @@ import CourseTable from './CourseTable'
 import CourseService from '../services/CourseService'
 import HomePage from "../styling/HomePage.css";
 import CourseEditor from "./CourseEditor";
+import Register from "./Register";
+import Login from "./Login";
+import Profile from "./Profile";
+import UserService from "../services/UserService";
 
 class WhiteBoard extends Component {
     constructor() {
         super();
         this.courseService = new CourseService();
+        this.userService = new UserService();
         this.state = {
             course: {
                 title: 'New Course', modules: [{
@@ -17,7 +22,8 @@ class WhiteBoard extends Component {
                 }]
             },
             courses: [],
-            updateCourseFld: ''
+            updateCourseFld: '',
+            loggedIn: true
         }
 
         this.titleChanged = this.titleChanged.bind(this);
@@ -37,14 +43,16 @@ class WhiteBoard extends Component {
         this.courseService.deleteCourse(course);
         this.setState({
             courses: this.updateCourses()
-        })}
+        })
+    }
 
     addCourse = () => {
         this.courseService.addCourse(this.state.course);
         this.setState({
             courses: this.updateCourses(),
             updateCourseFld: ''
-        })}
+        })
+    }
 
     updateCourse = course =>
         this.setState({
@@ -62,10 +70,23 @@ class WhiteBoard extends Component {
                 updateCourseFld: event.target.value
             });
 
+    loginUser = (username, password) => {
+        console.log(username + password)
+        this.setState(
+            {
+                loggedIn: true
+            }
+        )
+        if(this.state.loggedIn === true) {
+            return <Redirect to='/grid'/>
+        }
+    };
+
     render() {
         return (
             <div>
                 <nav
+                    style={{display: this.state.loggedIn ? '' : 'none'}}
                     className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
                     <button
                         className="navbar-toggler"
@@ -86,7 +107,19 @@ class WhiteBoard extends Component {
                             WhiteBoard
                         </a>
                         <ul className="navbar-nav">
-                            <li className="nav-item"></li>
+                            <Router>
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-link"
+                                        to="/profile">
+                                        Profile
+                                    </Link>
+                                    <Redirect path="/profile"
+                                           exact
+                                           component={Profile}/>
+
+                                </li>
+                            </Router>
                             <li className="nav-item"></li>
                         </ul>
                     </div>
@@ -109,15 +142,12 @@ class WhiteBoard extends Component {
                 </nav>
                 <Router>
                     <div>
-                        <Link
-                            to="/">
-                            Course Grid
-                        </Link>
-                        <Link
-                            to="/table">
-                            Course Table
-                        </Link>
-                        <Route path='/' exact
+                        <Route path="/"
+                               exact
+                               render={() =>
+                                   <Login
+                                       login={this.loginUser}/>}/>
+                        <Route path='/grid' exact
                                render={() =>
                                    <CourseGrid
                                        addCourse={this.addCourse}
@@ -131,9 +161,16 @@ class WhiteBoard extends Component {
                                    <CourseTable
                                        courses={this.state.courses}
                                        deleteCourse={this.deleteCourse}/>}/>
+                        <Route path="/register"
+                               exact
+                               component={Register}/>
+                        <Route path="/profile"
+                                  exact
+                                  component={Profile}/>
                     </div>
                 </Router>
                 <button
+                    style={{display: this.state.loggedIn ? '' : 'none'}}
                     className="btn btn-primary btn-circle shadow "
                     value="FIXEDADDCOURSEBTN"
                     id="fixedAdd"

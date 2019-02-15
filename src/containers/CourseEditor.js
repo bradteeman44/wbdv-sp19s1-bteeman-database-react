@@ -16,26 +16,33 @@ class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = new CourseService();
-        //let courseId = parseInt(props.match.params.id);
-        let course = this.componentDidMount();
         this.state = {
             courseId: '',
-            course: course,
-            selectedModule: course.modules[0],
-            selectedLesson: course.modules[0].lessons[0],
-            selectedTopic:  course.modules[0].lessons[0].topics[0],
+            course: {
+                id: 123, title: 'New Course', modules: [{
+                    id: '', title: '', lessons: [{id: 1, title: '', topics: [{id: 1, title: '', widgets: [{id: 1, title: ''}]}]}]
+                }]
+            },
+            selectedModule: {
+                id: 123, title: '', lessons: [{id: 1, title: '', topics: [{id: 1, title: '', widgets: [{id: 1, title: ''}]}]}]
+                },
+            selectedLesson: {
+                id: 123, title: '', topics: [{id: 1, title: '', widgets: [{id: 1, title: ''}]}]},
+            selectedTopic:  {
+                id: 123, title: 'New Course', widgets: [{id: 1, title: ''}]},
             updateCourseFld: ''
         }
     }
 
     componentDidMount() {
-        console.log(parseInt(this.props.match.params.id));
         this.selectCourse(parseInt(this.props.match.params.id))
-        /*
-        this.courseService.findCourseById(parseInt(this.props.match.params.id))
-            .then(course =>
-                this.setState({course: course}));
-                */
+        this.findCourse(parseInt(this.props.match.params.id))
+        console.log(this.state.course)
+    }
+
+    componentWillReceiveProps(newProps){
+        this.selectCourse
+        (parseInt(newProps.match.params.courseId));
     }
 
     selectCourse = courseId => {
@@ -43,13 +50,22 @@ class CourseEditor extends React.Component {
         this.setState({courseId: courseId});
     }
 
+    findCourse = courseId => {
+        this.courseService.findCourseById(courseId)
+            .then(course => {
+                console.log(course)
+                this.setState({
+                    course: course
+                })});
+    };
 
-
-    updateCourse = course =>
+    updateCourse = course => {
+        course.title = this.state.updateCourseFld;
         this.setState({
-            courses: this.courseService.updateCourse(course, this.state.updateCourseFld),
+            courses: this.courseService.updateCourse(course),
             updateCourseFld: ''
         })
+    }
 
     titleChanged = (event) =>
         this.setState(
@@ -118,6 +134,7 @@ class CourseEditor extends React.Component {
                     </div>
                     <div
                         className="col-10">
+
                         <LessonTabs
                             lessons={this.state.selectedModule.lessons}
                             module={this.state.selectedModule}
