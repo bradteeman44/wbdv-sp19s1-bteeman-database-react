@@ -1,6 +1,6 @@
 class UserService {
 
-    API_URL = "http://localhost:8080/api/"
+    API_URL = "https://wb-sp19s1-bteeman-rest.herokuapp.com/api/"
 
     registerUser = user => {
         fetch(this.API_URL + "login", {
