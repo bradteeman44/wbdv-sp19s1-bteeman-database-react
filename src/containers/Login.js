@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import LoginStyle from "../styling/LoginStyle.css";
-import UserService from "../services/UserService";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
-import Register from "./Register";
 
 class Login extends React.Component {
     constructor(props) {
@@ -79,11 +77,12 @@ class Login extends React.Component {
                             </button>
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <button
+                                    <Link
+                                        to="/"
                                         className="btn btn-danger btn-block"
                                         id="cancelBtn">
                                         Cancel
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                                 <div className="row">

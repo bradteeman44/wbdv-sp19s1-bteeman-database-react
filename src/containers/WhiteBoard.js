@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {BrowserRouter as Router, Link, Redirect, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseGrid from './CourseGrid'
 import CourseTable from './CourseTable'
 import CourseService from '../services/CourseService'
@@ -23,6 +23,10 @@ class WhiteBoard extends Component {
             },
             courses: [],
             updateCourseFld: '',
+            user: {
+                username: '',
+                password: ''
+            },
             loggedIn: true
         }
 
@@ -56,7 +60,7 @@ class WhiteBoard extends Component {
 
     updateCourse = course =>
         this.setState({
-            courses: this.props.courseService.updateCourse(this.props.course, course, this.state.updateCourse),
+            courses: this.courseService.updateCourse(this.props.course, course, this.state.updateCourse),
             updateCourseFld: ''
         })
 
@@ -74,80 +78,115 @@ class WhiteBoard extends Component {
         console.log(username + password)
         this.setState(
             {
-                loggedIn: true
+                username: username,
+                password: password
             }
         )
-        if(this.state.loggedIn === true) {
-            return <Redirect to='/grid'/>
-        }
+        this.setState({
+                user: this.userService.loginUser(this.state.user)
+            }
+        )
     };
+
+    updateUser = (username, role) => {
+        let user = {
+            username: username,
+            role: role
+        }
+        this.userService.profileUser(user).then(response => {
+            this.setState({user: response})
+            console.log(this.state.user)
+        })
+    }
+
+    logoutUser = () => {
+        this.userService.logoutUser()
+    }
+
+    registerUser = (username, password) => {
+        let user = {
+            username: username,
+            password: password
+        }
+        this.userService.registerUser(user).then(response => {
+            this.setState({user: response})
+            console.log(this.state.user)
+        })
+    }
 
     render() {
         return (
-            <div>
-                <nav
-                    style={{display: this.state.loggedIn ? '' : 'none'}}
-                    className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNavDropdown">
+            <Router>
+                <div>
+                    <nav
+                        style={{display: this.state.loggedIn ? '' : 'none'}}
+                        className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+                        <button
+                            className="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarNavDropdown">
                         <span
                             className="navbar-toggler-icon">
-
                         </span>
-                    </button>
-                    <div
-                        className="collapse navbar-collapse"
-                        id="navbarNavDropdown">
-                        <a
-                            className="navbar-brand"
-                            href="#">
-                            WhiteBoard
-                        </a>
-                        <ul className="navbar-nav">
-                            <Router>
+                        </button>
+                        <div
+                            className="collapse navbar-collapse"
+                            id="navbarNavDropdown">
+                            <Link
+                                id="home"
+                                to="/">
+                                <i className="fa fa-home fa-2x"></i>
+                            </Link>
+                            <ul className="navbar-nav">
                                 <li className="nav-item">
                                     <Link
                                         className="nav-link"
                                         to="/profile">
                                         Profile
                                     </Link>
-                                    <Redirect path="/profile"
-                                           exact
-                                           component={Profile}/>
-
                                 </li>
-                            </Router>
-                            <li className="nav-item"></li>
-                        </ul>
-                    </div>
-                    <label
-                        htmlFor="newCourseTitleFld">
-                    </label>
-                    <input
-                        className="form-control col-8"
-                        type="text"
-                        id="newCourseTitleFld"
-                        placeholder="New Course Title"
-                        value={this.state.updateCourseFld}
-                        onChange={this.titleChanged}/>
-                    <button
-                        className="btn btn-primary btn-circle"
-                        value="ADDCOURSEBTN"
-                        id="add" onClick={this.addCourse}>
-                        <i className="fa fa-plus"></i>
-                    </button>
-                </nav>
-                <Router>
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-link"
+                                        to="/login">
+                                        Login
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-link"
+                                        to="/register">
+                                        Register
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                        <label
+                            htmlFor="newCourseTitleFld">
+                        </label>
+                        <input
+                            className="form-control col-8"
+                            type="text"
+                            id="newCourseTitleFld"
+                            placeholder="New Course Title"
+                            value={this.state.updateCourseFld}
+                            onChange={this.titleChanged}/>
+                        <button
+                            className="btn btn-primary btn-circle"
+                            value="ADDCOURSEBTN"
+                            id="add" onClick={this.addCourse}>
+                            <i className="fa fa-plus"></i>
+                        </button>
+                    </nav>
                     <div>
-                        <Route path="/"
+                        <Route path="/login"
                                exact
                                render={() =>
                                    <Login
-                                       login={this.loginUser}/>}/>
-                        <Route path='/grid' exact
+                                       login={this.loginUser}
+                                       userService={this.userService}/>}/>
+                        <Route path='/' exact
                                render={() =>
                                    <CourseGrid
                                        addCourse={this.addCourse}
@@ -163,21 +202,29 @@ class WhiteBoard extends Component {
                                        deleteCourse={this.deleteCourse}/>}/>
                         <Route path="/register"
                                exact
-                               component={Register}/>
+                               render={() =>
+                                   <Register
+                                       userService={this.userService}
+                                       register={this.registerUser}
+                                       user={this.state.user}/>}/>
                         <Route path="/profile"
-                                  exact
-                                  component={Profile}/>
+                               render={() =>
+                                   <Profile
+                                       userService={this.userService}
+                                       logoutUser={this.logoutUser}
+                                       updateUser={this.updateUser}
+                                       user={this.state.user}/>}/>
                     </div>
-                </Router>
-                <button
-                    style={{display: this.state.loggedIn ? '' : 'none'}}
-                    className="btn btn-primary btn-circle shadow "
-                    value="FIXEDADDCOURSEBTN"
-                    id="fixedAdd"
-                    onClick={this.addCourse}>
-                    <i className="fa fa-plus"></i>
-                </button>
-            </div>
+                    <button
+                        style={{display: this.state.loggedIn ? '' : 'none'}}
+                        className="btn btn-primary btn-circle shadow "
+                        value="FIXEDADDCOURSEBTN"
+                        id="fixedAdd"
+                        onClick={this.addCourse}>
+                        <i className="fa fa-plus"></i>
+                    </button>
+                </div>
+            </Router>
         )
     }
 }

@@ -52,7 +52,7 @@ class CourseTable extends React.Component {
                             className="col-1">
                             <Link
                                 className="btn "
-                                to={`/grid`}><i className="fa fa-th"></i></Link>
+                                to={`/`}><i className="fa fa-th"></i></Link>
                         </div>
                         <div
                             className="col-1">
