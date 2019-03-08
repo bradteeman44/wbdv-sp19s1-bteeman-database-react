@@ -1,8 +1,8 @@
 class CourseService {
-    COURSE_API_URL = "https://wb-sp19s1-bteeman-rest.herokuapp.com/api/courses/";
-    MODULE_API_URL = "https://wb-sp19s1-bteeman-rest.herokuapp.com/api/modules/";
-    LESSON_API_URL = "https://wb-sp19s1-bteeman-rest.herokuapp.com/api/lessons/";
-    TOPIC_API_URL = "https://wb-sp19s1-bteeman-rest.herokuapp.com/api/topics/";
+    COURSE_API_URL = "localhost:8080/api/courses/";
+    MODULE_API_URL = "localhost:8080/api/modules/";
+    LESSON_API_URL = "localhost:8080/api/lessons/";
+    TOPIC_API_URL = "localhost:8080/api/topics/";
 
     addCourse = course =>
         fetch(this.COURSE_API_URL, {
