@@ -13,7 +13,7 @@ class CourseGrid extends React.Component {
     }
 
     componentDidMount() {
-        this.updateCourses();
+        this.props.updateCourses();
     }
 
     componentDidUpdate(prevProps) {

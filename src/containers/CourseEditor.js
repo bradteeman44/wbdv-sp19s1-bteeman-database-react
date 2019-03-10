@@ -40,20 +40,20 @@ class CourseEditor extends React.Component {
         console.log(this.state.course)
     }
 
-    componentWillReceiveProps(newProps){
-        this.selectCourse
-        (parseInt(newProps.match.params.courseId));
+    componentDidUpdate() {
+        console.log("componentDidUpdate");
+        if (this.course !== this.findCourse(this.state.courseId)) {
+            this.findCourse(this.state.courseId);
+        }
     }
 
     selectCourse = courseId => {
-        console.log(courseId);
         this.setState({courseId: courseId});
     }
 
     findCourse = courseId => {
         this.courseService.findCourseById(courseId)
             .then(course => {
-                console.log(course)
                 this.setState({
                     course: course
                 })});
@@ -61,8 +61,8 @@ class CourseEditor extends React.Component {
 
     updateCourse = course => {
         course.title = this.state.updateCourseFld;
+        this.courseService.updateCourse(course);
         this.setState({
-            courses: this.courseService.updateCourse(course),
             updateCourseFld: ''
         })
     }

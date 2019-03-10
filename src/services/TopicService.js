@@ -1,5 +1,5 @@
 class TopicService {
-    TOPIC_API_URL = "localhost:8080/api/topics/";
+    TOPIC_API_URL = "http://localhost:8080/api/topics/";
 
     findTopicById = topicId =>
         fetch(this.TOPIC_API_URL + topicId)

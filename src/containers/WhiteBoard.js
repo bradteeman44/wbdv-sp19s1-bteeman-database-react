@@ -37,6 +37,12 @@ class WhiteBoard extends Component {
         this.updateCourses();
     }
 
+    componentDidUpdate() {
+        if (this.courses !== this.updateCourses()) {
+            this.updateCourses();
+        }
+    }
+
     updateCourses = () => {
         this.courseService.findAllCourses()
             .then(courses =>
@@ -45,9 +51,6 @@ class WhiteBoard extends Component {
 
     deleteCourse = course => {
         this.courseService.deleteCourse(course);
-        this.setState({
-            courses: this.updateCourses()
-        })
     }
 
     addCourse = () => {
@@ -190,6 +193,7 @@ class WhiteBoard extends Component {
                                render={() =>
                                    <CourseGrid
                                        addCourse={this.addCourse}
+                                       updateCourses={this.updateCourses}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
                         <Route path="/course/:id"

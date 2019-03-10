@@ -1,5 +1,5 @@
 class LessonService {
-    LESSON_API_URL = "localhost:8080/api/lessons/";
+    LESSON_API_URL = "http://localhost:8080/api/lessons/";
 
     findLessoneById = lessonId =>
         fetch(this.LESSON_API_URL + lessonId)

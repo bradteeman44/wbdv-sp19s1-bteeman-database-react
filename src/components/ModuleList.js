@@ -1,10 +1,11 @@
 import React from 'react'
 import ModuleListItem from "./ModuleListItem";
+import ModuleService from "../services/ModuleService";
 
 class ModuleList extends React.Component {
     constructor(props) {
         super(props)
-
+        this.moduleService = new ModuleService();
         this.state = {
             module: {title: 'New Module', lessons: [{topics: [{widgets: [{}]}]}]},
             modules: this.props.modules,
@@ -16,11 +17,14 @@ class ModuleList extends React.Component {
         this.deleteModule = this.deleteModule.bind(this);
     }
 
-    createModule = () =>
+    createModule = () => {
+        this.moduleService.addModule(this.props.course, this.state.module);
+        console.log(this.moduleService.findAllModules(this.props.course.id))
         this.setState({
-            modules: this.props.courseService.addModule(this.props.course, this.state.module),
+            modules: this.moduleService.findAllModules(this.props.course.id),
             updateModuleFld: ''
         })
+    }
 
     deleteModule = module =>
         this.setState({
