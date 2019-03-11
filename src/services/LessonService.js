@@ -20,14 +20,14 @@ class LessonService {
         }).then(response => response.json());
     };
 
-    deleteLesson = (module, deleteLesson) => {
+    deleteLesson = (deleteLesson) => {
         console.log(deleteLesson.id);
         fetch(this.LESSON_API_URL + deleteLesson.id, {
             method: 'delete'
-        }).then(response => response.json());
+        }).then();
     }
 
-    updateLesson = (module, lesson) => {
+    updateLesson = (lesson) => {
         fetch(this.LESSON_API_URL + lesson.id, {
             method: 'put',
             body: JSON.stringify(lesson),

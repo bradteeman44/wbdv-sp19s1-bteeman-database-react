@@ -20,6 +20,7 @@ class CourseEditor extends React.Component {
         this.moduleService = new ModuleService();
         this.state = {
             courseId: '',
+            prevCourse: [],
             course: {
                 title: 'New Course', modules: [{
                     title: '', lessons: [{title: '', topics: [{title: '', widgets: [{title: ''}]}]}]
@@ -39,11 +40,14 @@ class CourseEditor extends React.Component {
     componentDidMount() {
         this.selectCourse(parseInt(this.props.match.params.id))
         this.findCourse(parseInt(this.props.match.params.id))
-        console.log(this.state.course)
     }
 
     componentDidUpdate(prevState) {
-        if (this.course !== prevState.course) {
+
+        console.log(this.state.course)
+        console.log(this.state.prevCourse)
+        if (this.state.course !== this.state.prevCourse) {
+            console.log("update course")
             this.findCourse(this.state.courseId);
         }
     }
@@ -56,6 +60,7 @@ class CourseEditor extends React.Component {
         this.courseService.findCourseById(courseId)
             .then(course => {
                 this.setState({
+                    prevCourse: course,
                     course: course
                 })});
     };
@@ -76,25 +81,34 @@ class CourseEditor extends React.Component {
 
     createModule = (module) => {
         this.moduleService.addModule(this.state.courseId, module)
-        this.findCourse(this.state.courseId);
+        this.courseService.findCourseById(this.state.courseId)
+            .then(course => {
+                this.setState({
+                    course: course
+                })});
+        console.log(module);
     }
 
     deleteModule = module => {
         this.moduleService.deleteModule(module);
-        this.findCourse(this.state.courseId);
+        this.courseService.findCourseById(this.state.courseId)
+            .then(course => {
+                this.setState({
+                    course: course
+                })});
     }
 
-    selectModule = module =>
+    selectModule = module => {
+        console.log(module)
+        console.log(module.lessons[0])
         this.setState({
             selectedModule: module,
-            selectedLesson: module.lessons[0],
-            selectedTopic: module.lessons[0].topics[0]
         })
+    }
 
     selectLesson = lesson =>
         this.setState({
-            selectedLesson: lesson,
-            selectedTopic: lesson.topics[0]
+            selectedLesson: lesson
         })
 
     selectTopic = topic =>
@@ -151,14 +165,12 @@ class CourseEditor extends React.Component {
                             lessons={this.state.selectedModule.lessons}
                             module={this.state.selectedModule}
                             selectLesson={this.selectLesson}
-                            selectedLesson={this.state.selectedLesson}
-                            courseService={this.courseService}/>
+                            selectedLesson={this.state.selectedLesson}/>
                         <TopicPills
                             topics={this.state.selectedLesson.topics}
                             lesson={this.state.selectedLesson}
                             selectTopic={this.selectTopic}
-                            selectedTopic={this.state.selectedTopic}
-                            courseService={this.courseService}/>
+                            selectedTopic={this.state.selectedTopic}/>
                         <Provider store={store}>
                             <WidgetListContainer
                                 topic={this.state.selectedTopic}/>

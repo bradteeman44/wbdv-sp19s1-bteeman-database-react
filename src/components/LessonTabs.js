@@ -1,12 +1,14 @@
 import React from 'react'
 import LessonTabsItem from "./LessonTabsItem";
+import LessonService from "../services/LessonService";
 
 class LessonTabs extends React.Component {
     constructor(props) {
         super(props)
-
+        this.lessonService = new LessonService();
         this.state = {
-            lesson: {title: 'New Lesson', topics: [{widgets: [{}]}]},
+            lesson: {
+                title: 'New Lesson', topics: [{title: '', widgets: [{title: ''}]}]},
             lessons: this.props.lessons,
             updateLessonFld: ''
         };
@@ -15,28 +17,46 @@ class LessonTabs extends React.Component {
         this.createLesson = this.createLesson.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.lessons !== prevProps.lessons) {
-            this.setState({lessons: this.props.lessons});
+
+
+    //componentWillReceiveProps(prevProps) {
+    ///    if (this.props.lessons !== this.state.lessons) {
+    //        console.log("updatelessonprops")
+     //       this.findLessons();
+     //   }
+    //}
+
+    componentDidUpdate() {
+        if (this.props.lessons !== this.state.lessons) {
+            console.log("updatelesson")
         }
     }
 
-    createLesson = () =>
+    createLesson = () => {
+        this.lessonService.addLesson(this.props.module, this.state.lesson)
         this.setState({
-            lessons: this.props.courseService.addLesson(this.props.module, this.state.lesson),
             updateLessonFld: ''
         })
+    }
 
-    deleteLesson = lesson =>
-        this.setState({
-            lessons: this.props.courseService.deleteLesson(this.props.module, lesson)
-        })
+    deleteLesson = lesson => {
+        this.lessonService.deleteLesson(lesson);
+    }
 
-    updateLesson = lesson =>
+    findLessons = () => {
+        this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
+            this.setState({
+                lessons: lessons
+            })});
+    }
+
+    updateLesson = lesson => {
+        lesson.title = this.state.updateLessonFld;
+        this.lessonService.updateLesson(lesson);
         this.setState({
-            modules: this.props.courseService.updateLesson(this.props.module, lesson, this.state.updateLessonFld),
             updateLessonFld: ''
         })
+    }
 
     titleChanged = (event) => {
         this.setState(

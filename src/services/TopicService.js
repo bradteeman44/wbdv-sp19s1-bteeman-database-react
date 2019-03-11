@@ -24,7 +24,7 @@ class TopicService {
         console.log(deleteTopic.id);
         fetch(this.TOPIC_API_URL + deleteTopic.id, {
             method: 'delete'
-        }).then(response => response.json());
+        }).then();
     }
 
     updateTopic = (topic) => {

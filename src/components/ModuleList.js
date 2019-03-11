@@ -7,7 +7,9 @@ class ModuleList extends React.Component {
         super(props)
         this.moduleService = new ModuleService();
         this.state = {
-            module: {title: 'New Module', lessons: [{topics: [{widgets: [{}]}]}]},
+            module: {
+                title: 'New Module', lessons: [{title: '', topics: [{title: '', widgets: [{title: ''}]}]}]
+            },
             modules: this.props.modules,
             updateModuleFld: ''
         };
@@ -23,16 +25,16 @@ class ModuleList extends React.Component {
     }
 
     componentWillReceiveProps(prevProps) {
-        console.log(prevProps.modules)
+        console.log(this.state.modules)
         console.log(this.props.modules)
-        if (this.props.modules !== prevProps.modules) {
+        if (this.props.modules !== this.state.modules) {
             console.log("update")
             this.findModules();
         }
     }
 
     createModule = () => {
-        this.props.createModule(this.state.module);
+        this.props.createModule(this.state.module)
         this.setState({
             updateModuleFld: ''
         })
@@ -47,8 +49,8 @@ class ModuleList extends React.Component {
 
     updateModule = module => {
         module.title = this.state.updateModuleFld;
+        this.moduleService.updateModule(module);
         this.setState({
-            modules: this.props.courseService.updateModule(this.props.courseId, module),
             updateModuleFld: ''
         })
     }
