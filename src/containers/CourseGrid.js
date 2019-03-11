@@ -13,11 +13,14 @@ class CourseGrid extends React.Component {
     }
 
     componentDidMount() {
-        this.props.updateCourses();
+        this.updateCourses();
     }
 
-    componentDidUpdate(prevProps) {
+    componentWillReceiveProps(prevProps) {
+        console.log(prevProps.courses)
+        console.log(this.props.courses)
         if (this.props.courses !== prevProps.courses) {
+            console.log("update")
             this.updateCourses();
         }
     }

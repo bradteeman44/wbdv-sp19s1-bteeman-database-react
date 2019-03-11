@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom'
 import WidgetListContainer from "./WidgetListContainer";
 import {createStore} from 'redux'
 import {Provider} from "react-redux";
+import ModuleService from "../services/ModuleService";
 
 const store = createStore(widgetReducer);
 
@@ -16,20 +17,21 @@ class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = new CourseService();
+        this.moduleService = new ModuleService();
         this.state = {
             courseId: '',
             course: {
-                id: 123, title: 'New Course', modules: [{
-                    id: '', title: '', lessons: [{id: 1, title: '', topics: [{id: 1, title: '', widgets: [{id: 1, title: ''}]}]}]
+                title: 'New Course', modules: [{
+                    title: '', lessons: [{title: '', topics: [{title: '', widgets: [{title: ''}]}]}]
                 }]
             },
             selectedModule: {
-                id: 123, title: '', lessons: [{id: 1, title: '', topics: [{id: 1, title: '', widgets: [{id: 1, title: ''}]}]}]
+                title: '', lessons: [{title: '', topics: [{title: '', widgets: [{title: ''}]}]}]
                 },
             selectedLesson: {
-                id: 123, title: '', topics: [{id: 1, title: '', widgets: [{id: 1, title: ''}]}]},
+                title: '', topics: [{title: '', widgets: [{title: ''}]}]},
             selectedTopic:  {
-                id: 123, title: 'New Course', widgets: [{id: 1, title: ''}]},
+                title: 'New Course', widgets: [{title: ''}]},
             updateCourseFld: ''
         }
     }
@@ -40,9 +42,8 @@ class CourseEditor extends React.Component {
         console.log(this.state.course)
     }
 
-    componentDidUpdate() {
-        console.log("componentDidUpdate");
-        if (this.course !== this.findCourse(this.state.courseId)) {
+    componentDidUpdate(prevState) {
+        if (this.course !== prevState.course) {
             this.findCourse(this.state.courseId);
         }
     }
@@ -72,6 +73,16 @@ class CourseEditor extends React.Component {
             {
                 updateCourseFld: event.target.value
             });
+
+    createModule = (module) => {
+        this.moduleService.addModule(this.state.courseId, module)
+        this.findCourse(this.state.courseId);
+    }
+
+    deleteModule = module => {
+        this.moduleService.deleteModule(module);
+        this.findCourse(this.state.courseId);
+    }
 
     selectModule = module =>
         this.setState({
@@ -127,9 +138,10 @@ class CourseEditor extends React.Component {
                         <ModuleList
                             selectModule={this.selectModule}
                             selectedModule={this.state.selectedModule}
+                            deleteModule={this.deleteModule}
+                            createModule={this.createModule}
                             modules={this.state.course.modules}
-                            course={this.state.course}
-                            courseService={this.courseService}
+                            courseId={this.props.match.params.id}
                         />
                     </div>
                     <div

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import LoginStyle from "../styling/LoginStyle.css";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 

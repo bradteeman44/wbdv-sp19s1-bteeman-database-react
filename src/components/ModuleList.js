@@ -14,27 +14,41 @@ class ModuleList extends React.Component {
 
         this.titleChanged = this.titleChanged.bind(this);
         this.createModule = this.createModule.bind(this);
-        this.deleteModule = this.deleteModule.bind(this);
+    }
+
+    componentDidMount() {
+        console.log(this.state.modules)
+        this.findModules()
+        console.log(this.state.modules)
+    }
+
+    componentWillReceiveProps(prevProps) {
+        console.log(prevProps.modules)
+        console.log(this.props.modules)
+        if (this.props.modules !== prevProps.modules) {
+            console.log("update")
+            this.findModules();
+        }
     }
 
     createModule = () => {
-        this.moduleService.addModule(this.props.course, this.state.module);
-        console.log(this.moduleService.findAllModules(this.props.course.id))
+        this.props.createModule(this.state.module);
         this.setState({
-            modules: this.moduleService.findAllModules(this.props.course.id),
             updateModuleFld: ''
         })
     }
 
-    deleteModule = module =>
-        this.setState({
-            modules: this.props.courseService.deleteModule(this.props.course, module)
-        })
+    findModules = () => {
+        this.moduleService.findAllModules(this.props.courseId).then(modules => {
+            this.setState({
+                modules: modules
+            })});;
+    }
 
     updateModule = module => {
         module.title = this.state.updateModuleFld;
         this.setState({
-            modules: this.props.courseService.updateModule(this.props.course, module),
+            modules: this.props.courseService.updateModule(this.props.courseId, module),
             updateModuleFld: ''
         })
     }
@@ -59,7 +73,7 @@ class ModuleList extends React.Component {
                                     <ModuleListItem
                                         selectedModule={this.props.selectedModule}
                                         selectModule={this.props.selectModule}
-                                        deleteModule={this.deleteModule}
+                                        deleteModule={this.props.deleteModule}
                                         updateModule={this.updateModule}
                                         key={module.id}
                                         module={module}/>

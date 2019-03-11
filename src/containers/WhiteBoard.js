@@ -37,12 +37,6 @@ class WhiteBoard extends Component {
         this.updateCourses();
     }
 
-    componentDidUpdate() {
-        if (this.courses !== this.updateCourses()) {
-            this.updateCourses();
-        }
-    }
-
     updateCourses = () => {
         this.courseService.findAllCourses()
             .then(courses =>
@@ -54,18 +48,11 @@ class WhiteBoard extends Component {
     }
 
     addCourse = () => {
-        this.courseService.addCourse(this.state.course);
+        this.courseService.addCourse(this.state.course).then(this.updateCourses);
         this.setState({
-            courses: this.updateCourses(),
             updateCourseFld: ''
         })
     }
-
-    updateCourse = course =>
-        this.setState({
-            courses: this.courseService.updateCourse(this.props.course, course, this.state.updateCourse),
-            updateCourseFld: ''
-        })
 
     titleChanged = (event) =>
         this.setState(
@@ -193,7 +180,6 @@ class WhiteBoard extends Component {
                                render={() =>
                                    <CourseGrid
                                        addCourse={this.addCourse}
-                                       updateCourses={this.updateCourses}
                                        deleteCourse={this.deleteCourse}
                                        courses={this.state.courses}/>}/>
                         <Route path="/course/:id"

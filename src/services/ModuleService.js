@@ -10,8 +10,8 @@ class ModuleService {
     findAllModules = cid =>
         fetch(this.COURSE_API_URL + cid + "/modules").then(response => response.json());
 
-    addModule = (course, module) => {
-        fetch(this.COURSE_API_URL + course.id + "/modules", {
+    addModule = (cid, module) => {
+        fetch(this.COURSE_API_URL + cid + "/modules", {
             method: 'post',
             body: JSON.stringify(module),
             headers: {
