@@ -38,11 +38,11 @@ const WidgetComponent = ({widget, viewMode, deleteWidget, updateWidget, moveUp, 
                 <div className="col-sm-2">
                     <select
                         onChange={(event) => {
-                            widget.type = event.target.value
+                            widget.wtype = event.target.value
                             updateWidget(widget)
                         }}
                         className="form-control"
-                        value={widget.type}
+                        value={widget.wtype}
                         id="role">
                         <option value="HEADING">Heading</option>
                         <option value="PARAGRAPH">Paragraph</option>
@@ -60,27 +60,27 @@ const WidgetComponent = ({widget, viewMode, deleteWidget, updateWidget, moveUp, 
                 </div>
             </div>
             {
-                widget.type === 'HEADING' &&
+                widget.wtype === 'HEADING' &&
                 <HeadingWidget
                     updateWidget={updateWidget}
                     widget={widget}
                     viewMode={viewMode}/> ||
-                widget.type === 'IMAGE' &&
+                widget.wtype === 'IMAGE' &&
                 <ImageWidget
                     updateWidget={updateWidget}
                     widget={widget}
                     viewMode={viewMode}/> ||
-                widget.type === 'PARAGRAPH' &&
+                widget.wtype === 'PARAGRAPH' &&
                 <ParagraphWidget
                     updateWidget={updateWidget}
                     widget={widget}
                     viewMode={viewMode}/> ||
-                widget.type === 'LIST' &&
+                widget.wtype === 'LIST' &&
                 <ListWidget
                     updateWidget={updateWidget}
                     widget={widget}
                     viewMode={viewMode}/> ||
-                widget.type === 'LINK' &&
+                widget.wtype === 'LINK' &&
                 <LinkWidget
                     updateWidget={updateWidget}
                     widget={widget}

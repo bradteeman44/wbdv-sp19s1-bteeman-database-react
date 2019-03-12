@@ -5,6 +5,7 @@ const WidgetList = ({loadWidgets, widgets, topicPrevious, topicActual, addWidget
     console.log(widgets)
     if (topicPrevious !== undefined) {
         if (topicActual.id !== topicPrevious.id) {
+            console.log("updateWidgetsTopicChange")
             loadWidgets(topicActual)
         }
     }

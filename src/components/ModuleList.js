@@ -44,7 +44,7 @@ class ModuleList extends React.Component {
         this.moduleService.findAllModules(this.props.courseId).then(modules => {
             this.setState({
                 modules: modules
-            })});;
+            })});
     }
 
     updateModule = module => {
@@ -53,6 +53,10 @@ class ModuleList extends React.Component {
         this.setState({
             updateModuleFld: ''
         })
+        this.moduleService.findAllModules(this.props.courseId).then(modules => {
+            this.setState({
+                modules: modules
+            })});
     }
 
     titleChanged = (event) => {

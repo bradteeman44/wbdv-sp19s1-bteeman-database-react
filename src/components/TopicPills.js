@@ -1,12 +1,14 @@
 import React from 'react'
 import TopicPillsItem from "./TopicPillsItem";
+import TopicService from "../services/TopicService";
 
 class TopicPills extends React.Component {
     constructor(props) {
         super(props)
-
+        this.topicService = new TopicService()
         this.state = {
             topic: {title: 'New Topic', widgets: [{}]},
+            prevTopics: this.props.topics,
             topics: this.props.topics,
             updateTopicFld: ''
         };
@@ -20,27 +22,52 @@ class TopicPills extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.topics !== prevProps.topics) {
-            this.setState({topics: this.props.topics});
+        if (this.state.prevTopics !== this.state.topics) {
+            console.log("updateTopics")
+            this.findTopics()
+        } else if (this.props.lesson !== prevProps.lesson) {
+            console.log("updateTopicsBasedOn Lesson")
+            this.findTopics()
         }
     }
 
-    createTopic = () =>
+    createTopic = () => {
+        this.topicService.addTopic(this.props.lesson, this.state.topic);
+        this.topicService.findAllTopics(this.props.lesson).then(topics => {
+            this.setState({
+                topics: topics
+            })});
+    };
+
+    deleteTopic = topic => {
+        this.topicService.deleteTopic(topic);
+        this.topicService.findAllTopics(this.props.lesson).then(topics => {
+            this.setState({
+                topics: topics
+            })
+        });
+    };
+
+    findTopics = () => {
+        this.topicService.findAllTopics(this.props.lesson).then(topics => {
+            this.setState({
+                prevTopics: topics,
+                topics: topics
+            })});
+    }
+
+    updateTopic = topic => {
+        topic.title = this.state.updateTopicFld;
+        this.topicService.updateTopic(topic);
         this.setState({
-            topics: this.props.courseService.addTopic(this.props.lesson, this.state.topic),
             updateTopicFld: ''
         })
-
-    deleteTopic = topic =>
-        this.setState({
-            topics: this.props.courseService.deleteTopic(this.props.lesson, topic)
-        })
-
-    updateTopic = topic =>
-        this.setState({
-            topics: this.props.courseService.updateTopic(this.props.lesson, topic, this.state.updateTopicFld),
-            updateTopicFld: ''
-        })
+        this.topicService.findAllTopics(this.props.lesson).then(topics => {
+            this.setState({
+                topics: topics
+            })
+        });
+    }
 
     titleChanged = (event) => {
         this.setState(

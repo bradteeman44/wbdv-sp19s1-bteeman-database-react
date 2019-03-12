@@ -1,7 +1,9 @@
 import CourseService from "../services/CourseService";
+import WidgetService from "../services/WidgetService";
 
 const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, action) => {
     const service = new CourseService();
+    const widgetService = new WidgetService();
 
     switch (action.type) {
         case 'LOAD_WIDGETS':
@@ -12,6 +14,7 @@ const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, actio
                 viewMode: state.viewMode
             }
         case 'CREATE_WIDGET':
+            widgetService.createWidget(state.topic)
             return {
                 widgets: [
                     ...state.widgets,

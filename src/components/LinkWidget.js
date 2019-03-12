@@ -64,22 +64,22 @@ export default LinkWidget
 /**
  <form>
  <div className="form-group row">
- <label></label> <input type="url"
+ <label></label> <input wtype="url"
  className="form-control wbdv-linkURL-fld" id="linkURLFld"
  placeholder="Link URL"/>
  </div>
  <div className="form-group row">
- <label></label> <input type="text"
+ <label></label> <input wtype="text"
  className="form-control wbdv-linkText-fld" id="linkTextFld"
  placeholder="Link text"/>
  </div>
  <div className="form-group row">
- <label></label> <input type="url"
+ <label></label> <input wtype="url"
  className="form-control wbdv-linkURL2-fld" id="linkURL2Fld"
  placeholder="Link URL"/>
  </div>
  <div className="form-group row">
- <label></label> <input type="text"
+ <label></label> <input wtype="text"
  className="form-control wbdv-widgetName-fld"
  id="widgetNameFld"
  placeholder="Widget name"/>

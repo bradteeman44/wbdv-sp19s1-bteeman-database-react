@@ -17,29 +17,29 @@
                 "widgets": [
                   {
                     "id": 1,
-                    "type": "HEADING",
+                    "wtype": "HEADING",
                     "size": 1,
                     "text": "The Document Object Model",
                     "editing": true
                   },
                   {
                     "id": 2,
-                    "type": "PARAGRAPH",
+                    "wtype": "PARAGRAPH",
                     "text": "This topic introduces the DOM"
                   },
                   {
                     "id": 3,
-                    "type": "LIST",
+                    "wtype": "LIST",
                     "items": "Nodes,Attributes,Tag names,IDs,Styles,Classes"
                   },
                   {
                     "id": 4,
-                    "type": "IMAGE",
+                    "wtype": "IMAGE",
                     "url": "https://picsum.photos/200"
                   },
                   {
                     "id": 5,
-                    "type": "LINK",
+                    "wtype": "LINK",
                     "title": "The DOM",
                     "url": "https://en.wikipedia.org/wiki/Document_Object_Model",
                     "text": "wiki"

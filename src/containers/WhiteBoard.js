@@ -45,6 +45,9 @@ class WhiteBoard extends Component {
 
     deleteCourse = course => {
         this.courseService.deleteCourse(course);
+        this.courseService.findAllCourses()
+            .then(courses =>
+                this.setState({courses: courses}));
     }
 
     addCourse = () => {

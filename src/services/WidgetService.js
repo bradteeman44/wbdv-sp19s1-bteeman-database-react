@@ -3,7 +3,12 @@ class WidgetService {
     TOPIC_API_URL = "http://localhost:8080/api/topics/";
     WIDGET_API_URL = "http://localhost:8080/api/widget/";
 
-    createWidget = (topic, widget) => {
+    createWidget = (topic) => {
+        const widget = {
+            title: 'New Widget',
+            wtype: "HEADING",
+            editing: false
+        }
         fetch(this.TOPIC_API_URL + topic.id + "/widget", {
             method: 'post',
             body: JSON.stringify(widget),

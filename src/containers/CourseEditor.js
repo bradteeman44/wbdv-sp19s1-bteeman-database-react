@@ -10,6 +10,7 @@ import WidgetListContainer from "./WidgetListContainer";
 import {createStore} from 'redux'
 import {Provider} from "react-redux";
 import ModuleService from "../services/ModuleService";
+import WidgetService from "../services/WidgetService";
 
 const store = createStore(widgetReducer);
 
@@ -18,6 +19,7 @@ class CourseEditor extends React.Component {
         super(props);
         this.courseService = new CourseService();
         this.moduleService = new ModuleService();
+        this.widgetService = new WidgetService();
         this.state = {
             courseId: '',
             prevCourse: [],
@@ -33,6 +35,7 @@ class CourseEditor extends React.Component {
                 title: '', topics: [{title: '', widgets: [{title: ''}]}]},
             selectedTopic:  {
                 title: 'New Course', widgets: [{title: ''}]},
+            widgets: [],
             updateCourseFld: ''
         }
     }
@@ -65,6 +68,14 @@ class CourseEditor extends React.Component {
                 })});
     };
 
+    setCourse = () => {
+        this.courseService.findCourseById(this.state.courseId)
+            .then(course => {
+                this.setState({
+                    course: course
+                })});
+    };
+
     updateCourse = course => {
         course.title = this.state.updateCourseFld;
         this.courseService.updateCourse(course);
@@ -86,7 +97,6 @@ class CourseEditor extends React.Component {
                 this.setState({
                     course: course
                 })});
-        console.log(module);
     }
 
     deleteModule = module => {
@@ -106,16 +116,27 @@ class CourseEditor extends React.Component {
         })
     }
 
-    selectLesson = lesson =>
+    selectLesson = lesson => {
+        console.log(lesson.id)
         this.setState({
             selectedLesson: lesson
         })
+    }
 
     selectTopic = topic =>
         this.setState({
             selectedTopic: topic
         })
 
+    updateWidgets = (widgets) => {
+        if(this.state.selectedTopic.widgets !== widgets) {
+            this.widgetService.findAllWidgets(this.state.selectedTopic).then(widgets =>
+                this.setState({
+                    widgets: widgets
+                })
+            )
+        }
+    }
 
     render() {
         return (
@@ -164,11 +185,13 @@ class CourseEditor extends React.Component {
                         <LessonTabs
                             lessons={this.state.selectedModule.lessons}
                             module={this.state.selectedModule}
+                            setCourse={this.setCourse}
                             selectLesson={this.selectLesson}
                             selectedLesson={this.state.selectedLesson}/>
                         <TopicPills
                             topics={this.state.selectedLesson.topics}
                             lesson={this.state.selectedLesson}
+                            setCourse={this.setCourse}
                             selectTopic={this.selectTopic}
                             selectedTopic={this.state.selectedTopic}/>
                         <Provider store={store}>

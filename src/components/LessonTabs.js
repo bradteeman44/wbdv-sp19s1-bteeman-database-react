@@ -7,6 +7,7 @@ class LessonTabs extends React.Component {
         super(props)
         this.lessonService = new LessonService();
         this.state = {
+            prevLessons: this.props.lessons,
             lesson: {
                 title: 'New Lesson', topics: [{title: '', widgets: [{title: ''}]}]},
             lessons: this.props.lessons,
@@ -17,8 +18,6 @@ class LessonTabs extends React.Component {
         this.createLesson = this.createLesson.bind(this);
     }
 
-
-
     //componentWillReceiveProps(prevProps) {
     ///    if (this.props.lessons !== this.state.lessons) {
     //        console.log("updatelessonprops")
@@ -26,9 +25,13 @@ class LessonTabs extends React.Component {
      //   }
     //}
 
-    componentDidUpdate() {
-        if (this.props.lessons !== this.state.lessons) {
+    componentDidUpdate(prevProps) {
+        if (this.state.prevLessons !== this.state.lessons) {
             console.log("updatelesson")
+            this.findLessons()
+        } else if (this.props.module !== prevProps.module) {
+            console.log("updatelessonChangedModule")
+            this.findLessons()
         }
     }
 
@@ -37,15 +40,26 @@ class LessonTabs extends React.Component {
         this.setState({
             updateLessonFld: ''
         })
+        this.props.setCourse()
+        this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
+            this.setState({
+                lessons: lessons
+            })});
     }
 
     deleteLesson = lesson => {
         this.lessonService.deleteLesson(lesson);
+        this.props.setCourse()
+        this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
+            this.setState({
+                lessons: lessons
+            })});
     }
 
     findLessons = () => {
         this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
             this.setState({
+                prevLessons: lessons,
                 lessons: lessons
             })});
     }
@@ -56,6 +70,10 @@ class LessonTabs extends React.Component {
         this.setState({
             updateLessonFld: ''
         })
+        this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
+            this.setState({
+                lessons: lessons
+            })});
     }
 
     titleChanged = (event) => {
