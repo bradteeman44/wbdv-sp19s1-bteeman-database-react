@@ -70,6 +70,7 @@ class Login extends React.Component {
                         </label>
                         <div className="col-sm-10">
                             <button
+                                type="button"
                                 className="btn btn-primary btn-block"
                                 id="signInBtn"
                                 onClick={() => this.props.login(this.state.usernameFld, this.state.passwordFld)}>
@@ -87,9 +88,9 @@ class Login extends React.Component {
                             </div>
                                 <div className="row">
                                     <div className="col-6">
-                                        <a>
+                                        <button>
                                             Forgot Password?
-                                        </a>
+                                        </button>
                                     </div>
                                     <div className="col-6">
                                         <Link

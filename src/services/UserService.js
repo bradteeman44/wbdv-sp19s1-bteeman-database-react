@@ -1,9 +1,13 @@
 class UserService {
 
-    API_URL = "https://wb-sp19s1-bteeman-rest.herokuapp.com/api/"
+    API_URL = "http://localhost:8080/api/"
 
-    registerUser = user => {
-        fetch(this.API_URL + "login", {
+    registerUser = (username, password) => {
+        const user = {
+            username: username,
+            password: password,
+        }
+        fetch(this.API_URL + "register", {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
@@ -18,10 +22,14 @@ class UserService {
         }).then(response => response.json());
     }
 
-    loginUser = credentials => {
+    loginUser = (username, password) => {
+        const user = {
+            username: username,
+            password: password,
+        }
         fetch(this.API_URL + "login", {
             method: 'post',
-            body: JSON.stringify(credentials),
+            body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
             }
@@ -31,7 +39,7 @@ class UserService {
     logoutUser = () => {
         fetch(this.API_URL + "logout", {
             method: 'post'
-        }).then(response => response.json());
+        }).then();
     }
 
     findAllUsers = () => {
@@ -44,6 +52,16 @@ class UserService {
             .then(response => response.json()
             );
     };
+
+    updateUser = user => {
+        fetch(this.API_URL + "users/" + user.id, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => response.json());
+    }
 
 }
 

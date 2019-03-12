@@ -1,10 +1,16 @@
 import React from 'react'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import FacultyService from "../services/FacultyService";
 
 class Register extends React.Component {
     constructor(props) {
         super(props);
+        this.facultyService = new FacultyService();
         this.state = {
+            user: {
+                username: '',
+                password: ''
+            },
             usernameFld: '',
             passwordFld: '',
             verifyPasswordFld: ''
@@ -28,7 +34,7 @@ class Register extends React.Component {
     verifyPasswordChanged = (event) => {
         this.setState(
             {
-                passwordFld: event.target.value
+                verifyPasswordFld: event.target.value
             });
     }
 
@@ -95,6 +101,7 @@ class Register extends React.Component {
                         <label className="col-sm-1 col-form-label"></label>
                         <div className="col-sm-10">
                             <button
+                                type="button"
                                 className="btn btn-primary btn-block"
                                 id="signUpBtn"
                                 onClick={this.registerUser}>

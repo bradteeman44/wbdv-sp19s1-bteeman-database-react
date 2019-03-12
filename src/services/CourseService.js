@@ -2,8 +2,8 @@ class CourseService {
     FACULTY_API_URL = "http://localhost:8080/api/faculty/";
     COURSE_API_URL = "http://localhost:8080/api/courses/";
 
-    addCourse = course =>
-        fetch(this.FACULTY_API_URL + "6/courses", {
+    addCourse = (fid, course) =>
+        fetch(this.FACULTY_API_URL + fid + "/courses", {
             method: 'post',
             body: JSON.stringify(course),
             headers: {
@@ -16,7 +16,7 @@ class CourseService {
             .then(response => response.json()
             );
 
-    findAllCourses = () =>
+    findAllCourses = fid =>
         fetch(this.FACULTY_API_URL + "6/courses").then(response => response.json());
 
     deleteCourse = deleteCourse => {

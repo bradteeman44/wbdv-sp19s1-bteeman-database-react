@@ -161,6 +161,7 @@ class Profile extends React.Component {
                         <label className="col-sm-1 col-form-label"></label>
                         <div className="col-sm-10">
                             <button
+                                type="button"
                                 className="btn btn-success btn-block"
                                 id="update"
                                 onClick={this.updateUser}>
@@ -174,6 +175,7 @@ class Profile extends React.Component {
                         </label>
                         <div className="col-sm-10">
                             <button
+                                type="button"
                                 className="btn btn-danger btn-block"
                                 href="/index.html"
                                 id="logout"

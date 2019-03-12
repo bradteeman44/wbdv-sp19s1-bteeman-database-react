@@ -9,12 +9,14 @@ import Register from "./Register";
 import Login from "./Login";
 import Profile from "./Profile";
 import UserService from "../services/UserService";
+import FacultyService from "../services/FacultyService";
 
 class WhiteBoard extends Component {
     constructor() {
         super();
         this.courseService = new CourseService();
         this.userService = new UserService();
+        this.facultyService = new FacultyService();
         this.state = {
             course: {
                 title: 'New Course', modules: [{
@@ -23,10 +25,8 @@ class WhiteBoard extends Component {
             },
             courses: [],
             updateCourseFld: '',
-            user: {
-                username: '',
-                password: ''
-            },
+            user: '',
+            prevUser: '',
             loggedIn: true
         }
 
@@ -35,6 +35,13 @@ class WhiteBoard extends Component {
 
     componentDidMount() {
         this.updateCourses();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.prevUser !== this.state.user) {
+            console.log("updateUser")
+            this.findUser()
+        }
     }
 
     updateCourses = () => {
@@ -51,7 +58,8 @@ class WhiteBoard extends Component {
     }
 
     addCourse = () => {
-        this.courseService.addCourse(this.state.course).then(this.updateCourses);
+        console.log(this.state.user)
+        this.courseService.addCourse(this.state.user.id, this.state.course).then(this.updateCourses);
         this.setState({
             updateCourseFld: ''
         })
@@ -69,27 +77,19 @@ class WhiteBoard extends Component {
 
     loginUser = (username, password) => {
         console.log(username + password)
-        this.setState(
-            {
-                username: username,
-                password: password
-            }
-        )
         this.setState({
-                user: this.userService.loginUser(this.state.user)
-            }
-        )
+            user: this.userService.loginUser(username, password)
+        })
     };
 
-    updateUser = (username, role) => {
-        let user = {
-            username: username,
-            role: role
-        }
-        this.userService.profileUser(user).then(response => {
-            this.setState({user: response})
-            console.log(this.state.user)
+    findUser = () => {
+        this.setState({
+            user: this.userService.findUserById(this.state.user.id),
+            prevUser: this.userService.findUserById(this.state.user.id)
         })
+    }
+    updateUser = (username, role) => {
+        this.userService.updateUser(username, role)
     }
 
     logoutUser = () => {
@@ -97,14 +97,20 @@ class WhiteBoard extends Component {
     }
 
     registerUser = (username, password) => {
-        let user = {
-            username: username,
-            password: password
-        }
-        this.userService.registerUser(user).then(response => {
-            this.setState({user: response})
-            console.log(this.state.user)
+        console.log(username)
+        console.log(password)
+        this.setState({
+            user: this.userService.registerUser(username, password)
         })
+        console.log(this.state.user)
+    }
+
+    profileUser = () => {
+        this.setState(
+            {
+                user: this.userService.profileUser()
+            }
+        )
     }
 
     render() {
