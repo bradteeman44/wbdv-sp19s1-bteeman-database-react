@@ -1,8 +1,9 @@
 class CourseService {
+    USER_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/users/"
     COURSE_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/courses";
 
-    addCourse = (course) =>
-        fetch(this.COURSE_API_URL, {
+    addCourse = (userId, course) =>
+        fetch(this.USER_API_URL + userId + "/courses", {
             method: 'post',
             body: JSON.stringify(course),
             headers: {
@@ -15,8 +16,8 @@ class CourseService {
             .then(response => response.json()
             );
 
-    findAllCourses = () =>
-        fetch(this.COURSE_API_URL).then(response => response.json());
+    findAllCourses = (userId) =>
+        fetch(this.USER_API_URL + userId + "/courses").then(response => response.json());
 
     deleteCourse = deleteCourse => {
         console.log(deleteCourse.id);

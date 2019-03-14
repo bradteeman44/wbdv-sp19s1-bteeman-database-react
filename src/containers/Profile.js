@@ -5,11 +5,11 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             user: this.props.user,
-            usernameFld: '',
-            phoneFld: '',
-            emailFld: '',
-            roleFld: '',
-            dobFld: ''
+            usernameFld: this.props.user.username,
+            passwordFld: this.props.user.password,
+            firstNameFld: this.props.user.firstName,
+            roleFld: this.props.user.role,
+            lastNameFld: this.props.user.lastName
         }
     }
 
@@ -24,36 +24,46 @@ class Profile extends React.Component {
             });
     }
 
-    phoneChanged = (event) => {
+    passwordChanged = (event) => {
         this.setState(
             {
-                phoneFld: event.target.value
+                passwordFld: event.target.value
             });
     }
 
-    emailChanged = (event) => {
+    firstNameChanged = (event) => {
         this.setState(
             {
-                emailFld: event.target.value
+                firstNameFld: event.target.value
             });
     }
 
     roleChanged = (event) => {
+        console.log(event.target.value)
         this.setState(
             {
                 roleFld: event.target.value
             });
     }
 
-    dobChanged = (event) => {
+    lastNameChanged = (event) => {
         this.setState(
             {
-                dobFld: event.target.value
+                lastNameFld: event.target.value
             });
     }
 
     updateUser = () => {
-        this.props.updateUser(this.state.username, this.state.role)
+        let user = {
+            id: this.state.user.id,
+            username: this.state.usernameFld,
+            password: this.state.passwordFld,
+            firstName: this.state.firstNameFld,
+            lastName: this.state.lastNameFld,
+            role: this.state.roleFld
+        }
+        console.log(user)
+        this.props.updateUser(user)
     }
 
     logoutUser = () => {
@@ -87,7 +97,7 @@ class Profile extends React.Component {
                             <input
                                 className="form-control wbdv-username-fld"
                                 id="usernameFld"
-                                placeholder="Alice"
+                                placeholder={this.state.user.username}
                                 onChange={this.usernameChanged}>
                             </input>
                         </div>
@@ -96,14 +106,14 @@ class Profile extends React.Component {
                         <label
                             htmlFor="phoneFld"
                             className="col-sm-1 col-form-label">
-                            Phone
+                            Password
                         </label>
                         <div className="col-sm-10">
-                            <input type="tel"
+                            <input
                                    className="form-control wbdv-phone-fld"
                                    id="phoneFld"
-                                   placeholder="(555) 867-5309"
-                                   onChange={this.phoneChanged}>
+                                   placeholder={this.state.user.password}
+                                   onChange={this.passwordChanged}>
                             </input>
                         </div>
                     </div>
@@ -111,15 +121,29 @@ class Profile extends React.Component {
                         <label
                             htmlFor="emailFld"
                             className="col-sm-1 col-form-label">
-                            Email
+                            First Name
                         </label>
                         <div className="col-sm-10">
                             <input
-                                type="email"
                                 className="form-control wbdv-email-fld"
                                 id="emailFld"
-                                placeholder="alice@wonderland.com"
-                                onChange={this.emailChanged}>
+                                placeholder={this.state.user.firstName}
+                                onChange={this.firstNameChanged}>
+                            </input>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label
+                            htmlFor="emailFld"
+                            className="col-sm-1 col-form-label">
+                            Last Name
+                        </label>
+                        <div className="col-sm-10">
+                            <input
+                                className="form-control wbdv-email-fld"
+                                id="emailFld"
+                                placeholder={this.state.user.lastName}
+                                onChange={this.lastNameChanged}>
                             </input>
                         </div>
                     </div>
@@ -133,28 +157,12 @@ class Profile extends React.Component {
                             <select
                                 className="form-control"
                                 id="role"
+                                placeholder={this.state.user.role}
                                 onChange={this.roleChanged}>
                                 <option value="FACULTY">Faculty</option>
                                 <option value="STUDENT">Student</option>
                                 <option value="ADMIN">Admin</option>
                             </select>
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label
-                            htmlFor="dobFld"
-                            className="col-sm-1 col-form-label">
-                            Date of
-                            Birth
-                        </label>
-                        <div className="col-sm-10">
-                            <input
-                                type="date"
-                                className="form-control wbdv-dob-fld"
-                                id="dobFld"
-                                placeholder="mm/dd/yyyy"
-                                onChange={this.dobChanged}>
-                            </input>
                         </div>
                     </div>
                     <div className="form-group row">

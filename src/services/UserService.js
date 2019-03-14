@@ -1,12 +1,8 @@
 class UserService {
 
-    API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/"
+    API_URL = "http://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/"
 
-    registerUser = (username, password) => {
-        const user = {
-            username: username,
-            password: password,
-        }
+    registerUser = (user) =>
         fetch(this.API_URL + "register", {
             method: 'post',
             body: JSON.stringify(user),
@@ -14,7 +10,6 @@ class UserService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
-    }
 
     profileUser = () => {
         fetch(this.API_URL + "profile", {
@@ -22,11 +17,7 @@ class UserService {
         }).then(response => response.json());
     }
 
-    loginUser = (username, password) => {
-        const user = {
-            username: username,
-            password: password,
-        }
+    loginUser = (user) =>
         fetch(this.API_URL + "login", {
             method: 'post',
             body: JSON.stringify(user),
@@ -34,19 +25,13 @@ class UserService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
-    };
 
-    logoutUser = () => {
+    logoutUser = () =>
         fetch(this.API_URL + "logout", {
             method: 'post'
         }).then();
-    }
 
-    createUser = (username, password) => {
-        const user = {
-            username: username,
-            password: password,
-        }
+    createUser = (user) =>
         fetch(this.API_URL + "users", {
             method: 'post',
             body: JSON.stringify(user),
@@ -54,20 +39,18 @@ class UserService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
-    }
 
     findAllUsers = () => {
         fetch(this.API_URL + "users")
             .then(response => response.json());
     };
 
-    findUserById = userId => {
+    findUserById = userId =>
         fetch(this.API_URL + "users/" + userId)
             .then(response => response.json()
             );
-    };
 
-    updateUser = user => {
+    updateUser = user =>
         fetch(this.API_URL + "users/" + user.id, {
             method: 'put',
             body: JSON.stringify(user),
@@ -75,7 +58,6 @@ class UserService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
-    }
 
     deleteUser = deleteUSer => {
         fetch(this.API_URL + "users/" + deleteUSer.id, {

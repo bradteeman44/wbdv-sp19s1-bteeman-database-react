@@ -13,7 +13,10 @@ class CourseTable extends React.Component {
     }
 
     componentDidMount() {
-        this.updateCourses();
+        console.log(this.props.user)
+        if(this.props.user !== '') {
+            this.updateCourses();
+        }
     }
 
     componentWillReceiveProps(prevProps) {
@@ -26,7 +29,7 @@ class CourseTable extends React.Component {
     }
 
     updateCourses = () => {
-        this.courseService.findAllCourses()
+        this.courseService.findAllCourses(this.props.user.id)
             .then(courses =>
                 this.setState({courses: courses}));
     };

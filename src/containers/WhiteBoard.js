@@ -34,18 +34,22 @@ class WhiteBoard extends Component {
     }
 
     componentDidMount() {
-        this.updateCourses();
+        if(this.state.user !== '') {
+            this.updateCourses();
+        }
     }
 
+    /*
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.state.prevUser !== this.state.user) {
             console.log("updateUser")
             this.findUser()
         }
     }
+    */
 
     updateCourses = () => {
-        this.courseService.findAllCourses()
+        this.courseService.findAllCourses(this.state.user.id)
             .then(courses =>
                 this.setState({courses: courses}));
     };
@@ -59,10 +63,14 @@ class WhiteBoard extends Component {
 
     addCourse = () => {
         console.log(this.state.user)
-        this.courseService.addCourse(this.state.course).then(this.updateCourses);
-        this.setState({
-            updateCourseFld: ''
-        })
+        if(this.state.user !== '') {
+            this.courseService.addCourse(this.state.user.id, this.state.course).then(this.updateCourses);
+            this.setState({
+                updateCourseFld: ''
+            })
+        } else {
+            alert("There is no user logged in.  Please login or register an account.")
+        }
     }
 
     titleChanged = (event) =>
@@ -77,9 +85,34 @@ class WhiteBoard extends Component {
 
     loginUser = (username, password) => {
         console.log(username + password)
-        this.setState({
-            user: this.userService.loginUser(username, password)
-        })
+        let user = {
+            username: username,
+            password: password
+        }
+        this.userService.loginUser(user)
+            .then(user => {
+                this.setState({
+                    user: user
+                })
+                console.log(this.state.user)
+            })
+    };
+
+    createUser = (username, password) => {
+        console.log(username + password)
+        let user = {
+            username: username,
+            password: password
+        }
+        console.log(user)
+        this.userService.createUser(user)
+            .then(user => {
+                this.setState({
+                    user: user
+                })
+                this.loginUser(user);
+            })
+        console.log(this.state.user)
     };
 
     findUser = () => {
@@ -88,29 +121,43 @@ class WhiteBoard extends Component {
             prevUser: this.userService.findUserById(this.state.user.id)
         })
     }
-    updateUser = (username, role) => {
-        this.userService.updateUser(username, role)
+
+    updateUser = (user) => {
+        console.log(user);
+        this.userService.updateUser(user)
+            .then(
+                this.setState({
+                    user: user
+                })
+            )
     }
 
     logoutUser = () => {
         this.userService.logoutUser()
+            .then(
+                this.setState({
+                    user: ''
+                })
+            )
     }
 
     registerUser = (username, password) => {
-        console.log(username)
-        console.log(password)
-        this.setState({
-            user: this.userService.registerUser(username, password)
-        })
-        console.log(this.state.user)
+        let user = {
+            username: username,
+            password: password
+        }
+        console.log(user)
+        this.userService.registerUser(user)
+            .then(user => {
+                this.setState({
+                    user: user
+                })
+                console.log(this.state.user)
+            })
     }
 
     profileUser = () => {
-        this.setState(
-            {
-                user: this.userService.profileUser()
-            }
-        )
+
     }
 
     render() {
@@ -190,6 +237,7 @@ class WhiteBoard extends Component {
                                    <CourseGrid
                                        addCourse={this.addCourse}
                                        deleteCourse={this.deleteCourse}
+                                       user={this.state.user}
                                        courses={this.state.courses}/>}/>
                         <Route path="/course/:id"
                                exact
@@ -197,6 +245,7 @@ class WhiteBoard extends Component {
                         <Route path='/table' exact
                                render={() =>
                                    <CourseTable
+                                       user={this.state.user}
                                        courses={this.state.courses}
                                        deleteCourse={this.deleteCourse}/>}/>
                         <Route path="/register"
