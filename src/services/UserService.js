@@ -42,6 +42,20 @@ class UserService {
         }).then();
     }
 
+    createUser = (username, password) => {
+        const user = {
+            username: username,
+            password: password,
+        }
+        fetch(this.API_URL + "users", {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => response.json());
+    }
+
     findAllUsers = () => {
         fetch(this.API_URL + "users")
             .then(response => response.json());
@@ -61,6 +75,12 @@ class UserService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
+    }
+
+    deleteUser = deleteUSer => {
+        fetch(this.API_URL + "users/" + deleteUSer.id, {
+            method: 'delete'
+        }).then();
     }
 
 }
