@@ -96,6 +96,7 @@ class WhiteBoard extends Component {
                 })
                 console.log(this.state.user)
             })
+        alert("Successfully Logged In")
     };
 
     createUser = (username, password) => {
@@ -139,6 +140,7 @@ class WhiteBoard extends Component {
                     user: ''
                 })
             )
+        alert("Successfully Logged Out")
     }
 
     registerUser = (username, password) => {

@@ -43,6 +43,9 @@ class Register extends React.Component {
         console.log(this.state.verifyPasswordFld)
         if(this.state.passwordFld === this.state.verifyPasswordFld) {
             this.props.register(this.state.usernameFld, this.state.passwordFld)
+            alert("Successfully Registered")
+        } else {
+            alert("The Password and Verify Password fields don't match, please re-enter the passwords.")
         }
     }
 

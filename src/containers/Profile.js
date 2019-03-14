@@ -64,6 +64,7 @@ class Profile extends React.Component {
         }
         console.log(user)
         this.props.updateUser(user)
+
     }
 
     logoutUser = () => {
