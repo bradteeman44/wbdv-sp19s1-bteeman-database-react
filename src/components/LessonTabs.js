@@ -28,35 +28,36 @@ class LessonTabs extends React.Component {
     componentDidUpdate(prevProps) {
         if (this.state.prevLessons !== this.state.lessons) {
             console.log("updatelesson")
-            this.findLessons()
+            this.findLessonsUpdate()
         } else if (this.props.module !== prevProps.module) {
             console.log("updatelessonChangedModule")
-            this.findLessons()
+            this.findLessonsUpdate()
         }
     }
 
     createLesson = () => {
         this.lessonService.addLesson(this.props.module, this.state.lesson)
+            .then(this.findLessons())
         this.setState({
             updateLessonFld: ''
         })
         this.props.setCourse()
-        this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
-            this.setState({
-                lessons: lessons
-            })});
     }
 
     deleteLesson = lesson => {
-        this.lessonService.deleteLesson(lesson);
+        this.lessonService.deleteLesson(lesson)
+            .then(this.findLessons())
         this.props.setCourse()
+    }
+
+    findLessons = () => {
         this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
             this.setState({
                 lessons: lessons
             })});
     }
 
-    findLessons = () => {
+    findLessonsUpdate = () => {
         this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
             this.setState({
                 prevLessons: lessons,
@@ -66,14 +67,12 @@ class LessonTabs extends React.Component {
 
     updateLesson = lesson => {
         lesson.title = this.state.updateLessonFld;
-        this.lessonService.updateLesson(lesson);
+        this.lessonService.updateLesson(lesson)
+            .then(this.findLessons());
         this.setState({
             updateLessonFld: ''
         })
-        this.lessonService.findAllLessons(this.props.module.id).then(lessons => {
-            this.setState({
-                lessons: lessons
-            })});
+        this.props.setCourse()
     }
 
     titleChanged = (event) => {

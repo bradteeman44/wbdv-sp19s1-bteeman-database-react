@@ -1,6 +1,5 @@
 class CourseService {
-    FACULTY_API_URL = "http://localhost:8080/api/faculty/";
-    COURSE_API_URL = "http://localhost:8080/api/courses/";
+    COURSE_API_URL = "http://localhost:8080/api/courses";
 
     addCourse = (course) =>
         fetch(this.COURSE_API_URL, {
@@ -12,7 +11,7 @@ class CourseService {
         }).then(response => response.json());
 
     findCourseById = courseId =>
-        fetch(this.COURSE_API_URL + courseId)
+        fetch(this.COURSE_API_URL + "/" + courseId)
             .then(response => response.json()
             );
 
@@ -21,13 +20,13 @@ class CourseService {
 
     deleteCourse = deleteCourse => {
         console.log(deleteCourse.id);
-        fetch(this.COURSE_API_URL + deleteCourse.id, {
+        fetch(this.COURSE_API_URL + "/" + deleteCourse.id, {
             method: 'delete'
         }).then();
     }
 
     updateCourse = (course) => {
-        fetch(this.COURSE_API_URL + course.id, {
+        fetch(this.COURSE_API_URL + "/" + course.id, {
             method: 'put',
             body: JSON.stringify(course),
             headers: {

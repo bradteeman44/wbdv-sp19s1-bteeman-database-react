@@ -59,7 +59,7 @@ class WhiteBoard extends Component {
 
     addCourse = () => {
         console.log(this.state.user)
-        this.courseService.addCourse(this.state.user.id, this.state.course).then(this.updateCourses);
+        this.courseService.addCourse(this.state.course).then(this.updateCourses);
         this.setState({
             updateCourseFld: ''
         })

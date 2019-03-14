@@ -10,7 +10,7 @@ class ModuleService {
     findAllModules = cid =>
         fetch(this.COURSE_API_URL + cid + "/modules").then(response => response.json());
 
-    addModule = (cid, module) => {
+    addModule = (cid, module) =>
         fetch(this.COURSE_API_URL + cid + "/modules", {
             method: 'post',
             body: JSON.stringify(module),
@@ -18,16 +18,13 @@ class ModuleService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
-    };
 
-    deleteModule = (deleteModule) => {
-        console.log(deleteModule.id);
+    deleteModule = (deleteModule) =>
         fetch(this.MODULE_API_URL + deleteModule.id, {
             method: 'delete'
         }).then();
-    }
 
-    updateModule = (module) => {
+    updateModule = (module) =>
         fetch(this.MODULE_API_URL + module.id, {
             method: 'put',
             body: JSON.stringify(module),
@@ -35,6 +32,5 @@ class ModuleService {
                 'content-type': 'application/json'
             }
         }).then(response => response.json());
-    };
 }
 export default ModuleService;

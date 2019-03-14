@@ -11,6 +11,7 @@ class ModuleList extends React.Component {
                 title: 'New Module', lessons: [{title: '', topics: [{title: '', widgets: [{title: ''}]}]}]
             },
             modules: this.props.modules,
+            prevModules: this.props.modules,
             updateModuleFld: ''
         };
 
@@ -20,24 +21,57 @@ class ModuleList extends React.Component {
 
     componentDidMount() {
         console.log(this.state.modules)
-        this.findModules()
+        this.findModulesUpdate()
         console.log(this.state.modules)
     }
 
+    /*
     componentWillReceiveProps(prevProps) {
         console.log(this.state.modules)
         console.log(this.props.modules)
-        if (this.props.modules !== this.state.modules) {
-            console.log("update")
+        if (this.state.modules !== this.state.prevModules) {
+            console.log("updateChangeState")
             this.findModules();
+        } else if (this.props.modules !== prevProps.modules) {
+            console.log("updateChangeProps")
+            this.findModules();
+        }
+    }
+     */
+
+    componentDidUpdate(prevProps) {
+        console.log(this.state.modules)
+        console.log(this.props.modules)
+        if (this.state.modules !== this.state.prevModules) {
+            console.log("updateChangeState")
+            this.findModulesUpdate();
+        } else if (this.props.modules !== prevProps.modules) {
+            console.log("updateChangeProps")
+            this.findModulesUpdate();
         }
     }
 
     createModule = () => {
-        this.props.createModule(this.state.module)
+        this.moduleService.addModule(this.props.courseId, this.state.module)
+            .then(this.findModules)
+        this.props.setCourse()
         this.setState({
             updateModuleFld: ''
         })
+    }
+
+    deleteModule = module => {
+        this.moduleService.deleteModule(module)
+            .then(this.findModules())
+        this.props.setCourse()
+    }
+
+    findModulesUpdate = () => {
+        this.moduleService.findAllModules(this.props.courseId).then(modules => {
+            this.setState({
+                modules: modules,
+                prevModules: modules
+            })});
     }
 
     findModules = () => {
@@ -49,14 +83,12 @@ class ModuleList extends React.Component {
 
     updateModule = module => {
         module.title = this.state.updateModuleFld;
-        this.moduleService.updateModule(module);
+        this.moduleService.updateModule(module)
+            .then(this.findModules());
         this.setState({
             updateModuleFld: ''
         })
-        this.moduleService.findAllModules(this.props.courseId).then(modules => {
-            this.setState({
-                modules: modules
-            })});
+        this.props.setCourse()
     }
 
     titleChanged = (event) => {
@@ -79,7 +111,7 @@ class ModuleList extends React.Component {
                                     <ModuleListItem
                                         selectedModule={this.props.selectedModule}
                                         selectModule={this.props.selectModule}
-                                        deleteModule={this.props.deleteModule}
+                                        deleteModule={this.deleteModule}
                                         updateModule={this.updateModule}
                                         key={module.id}
                                         module={module}/>

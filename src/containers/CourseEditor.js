@@ -90,24 +90,6 @@ class CourseEditor extends React.Component {
                 updateCourseFld: event.target.value
             });
 
-    createModule = (module) => {
-        this.moduleService.addModule(this.state.courseId, module)
-        this.courseService.findCourseById(this.state.courseId)
-            .then(course => {
-                this.setState({
-                    course: course
-                })});
-    }
-
-    deleteModule = module => {
-        this.moduleService.deleteModule(module);
-        this.courseService.findCourseById(this.state.courseId)
-            .then(course => {
-                this.setState({
-                    course: course
-                })});
-    }
-
     selectModule = module => {
         console.log(module)
         console.log(module.lessons[0])
@@ -175,6 +157,7 @@ class CourseEditor extends React.Component {
                             selectedModule={this.state.selectedModule}
                             deleteModule={this.deleteModule}
                             createModule={this.createModule}
+                            setCourse={this.setCourse}
                             modules={this.state.course.modules}
                             courseId={this.props.match.params.id}
                         />
