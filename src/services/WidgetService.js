@@ -1,7 +1,7 @@
 class WidgetService {
 
-    TOPIC_API_URL = "http://localhost:8080/api/topics/";
-    WIDGET_API_URL = "http://localhost:8080/api/widget/";
+    TOPIC_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/topics/";
+    WIDGET_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/widget/";
 
     createWidget = (topic) => {
         const widget = {

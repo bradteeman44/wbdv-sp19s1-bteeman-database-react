@@ -1,6 +1,6 @@
 class ListWidgetService {
 
-    LIST_WIDGET_API_URL = "http://localhost:8080/api/list/widget/";
+    LIST_WIDGET_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/list/widget/";
 
     findListWidgetById = (widgetId) =>
         fetch(this.LIST_WIDGET_API_URL + widgetId)

@@ -1,6 +1,6 @@
 class HeadingWidgetService {
 
-    HEADING_WIDGET_API_URL = "http://localhost:8080/api/heading/widget/";
+    HEADING_WIDGET_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/heading/widget/";
 
     findHeadingWidgetById = (widgetId) =>
         fetch(this.HEADING_WIDGET_API_URL + widgetId)

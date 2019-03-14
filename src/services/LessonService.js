@@ -1,6 +1,6 @@
 class LessonService {
-    LESSON_API_URL = "http://localhost:8080/api/lessons/";
-    MODULE_API_URL = "http://localhost:8080/api/modules/";
+    LESSON_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/lessons/";
+    MODULE_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/modules/";
 
     findLessoneById = lessonId =>
         fetch(this.LESSON_API_URL + lessonId)

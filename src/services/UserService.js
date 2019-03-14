@@ -1,6 +1,6 @@
 class UserService {
 
-    API_URL = "http://localhost:8080/api/"
+    API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/"
 
     registerUser = (username, password) => {
         const user = {

@@ -1,6 +1,6 @@
 class TopicService {
-    TOPIC_API_URL = "http://localhost:8080/api/topics/";
-    LESSON_API_URL = "http://localhost:8080/api/lessons/";
+    TOPIC_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/topics/";
+    LESSON_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/lessons/";
 
     findTopicById = topicId =>
         fetch(this.TOPIC_API_URL + topicId)

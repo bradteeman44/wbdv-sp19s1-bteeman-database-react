@@ -1,6 +1,6 @@
 class ParagraphWidgetService {
 
-    PARAGRAPH_WIDGET_API_URL = "http://localhost:8080/api/paragraph/widget/";
+    PARAGRAPH_WIDGET_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/paragraph/widget/";
 
     findParagraphWidgetById = (widgetId) =>
         fetch(this.LIST_WIDGET_API_URL + widgetId)

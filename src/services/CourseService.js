@@ -1,5 +1,5 @@
 class CourseService {
-    COURSE_API_URL = "http://localhost:8080/api/courses";
+    COURSE_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/courses";
 
     addCourse = (course) =>
         fetch(this.COURSE_API_URL, {

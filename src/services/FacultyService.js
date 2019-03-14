@@ -1,7 +1,7 @@
 class FacultyService {
 
-    USER_API_URL = "http://localhost:8080/api/users/";
-    FACULTY_API_URL = "http://localhost:8080/api/faculty/";
+    USER_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/users/";
+    FACULTY_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/faculty/";
 
     createFaculty = faculty => {
         fetch(this.FACULTY_API_URL, {

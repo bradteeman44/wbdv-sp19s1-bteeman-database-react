@@ -1,6 +1,6 @@
 class ImageWidgetService {
 
-    IMAGE_WIDGET_API_URL = "http://localhost:8080/api/image/widget/";
+    IMAGE_WIDGET_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/image/widget/";
 
     findImageWidgetById = (widgetId) =>
         fetch(this.IMAGE_WIDGET_API_URL + widgetId)

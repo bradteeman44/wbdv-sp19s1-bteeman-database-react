@@ -1,6 +1,6 @@
 class ModuleService {
-    MODULE_API_URL = "http://localhost:8080/api/modules/";
-    COURSE_API_URL = "http://localhost:8080/api/courses/";
+    MODULE_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/modules/";
+    COURSE_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/courses/";
 
     findModuleById = mid =>
         fetch(this.MODULE_API_URL + mid)
