@@ -14,7 +14,6 @@ const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, actio
                 viewMode: state.viewMode
             }
         case 'CREATE_WIDGET':
-            widgetService.createWidget(state.topic)
             return {
                 widgets: [
                     ...state.widgets,
@@ -24,8 +23,9 @@ const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, actio
                 viewMode: state.viewMode
             }
         case 'DELETE_WIDGET':
+            widgetService.deleteWidget(action.widget)
             return {
-                widgets: state.widgets.filter(widget => widget.id !== action.widget.id),
+                widgets: service.deleteWidget(state.topic, action.widget),
                 topic: state.topic,
                 viewMode: state.viewMode
             }
@@ -37,8 +37,9 @@ const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, actio
                 viewMode: state.viewMode
             }
         case 'SAVE_WIDGETS':
+            widgetService.saveWidgets(state.topic, action.widgets)
             return {
-                widgets: service.saveWidgets(state.topic, action.widgets),
+                widgets: service.findWidgets(state.topic),
                 topic: state.topic,
                 viewMode: state.viewMode
             }
@@ -77,19 +78,19 @@ const widgetReducer = (state = {widgets: [], topic: '', viewMode: 'EDIT'}, actio
             }
         case 'FIND_WIDGET':
             return {
-                widgets: service.findWidget(action.widget.id),
+                widgets: widgetService.findWidgetById(action.widget.id),
                 topic: state.topic,
                 viewMode: state.viewMode
             }
         case 'FIND_ALL_WIDGETS_FOR_TOPIC':
             return {
-                widgets: service.findWidgets(state.topic),
+                widgets: widgetService.findAllWidgets(state.topic),
                 topic: state.topic,
                 viewMode: state.viewMode
             }
         case 'FIND_ALL_WIDGETS':
             return {
-                widgets: service.findAllWidgets,
+                widgets: widgetService.findAllWidgets(state.topic),
                 topic: state.topic,
                 viewMode: state.viewMode
             }

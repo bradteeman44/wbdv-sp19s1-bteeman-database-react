@@ -1,6 +1,16 @@
 class HeadingWidgetService {
 
     HEADING_WIDGET_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/heading/widget/";
+    TOPIC_API_URL = "https://wbdv-sp19s1-bteeman-db-service.herokuapp.com/api/topics/";
+
+    createHeadingWidget = (topic, widget) =>
+        fetch(this.TOPIC_API_URL + topic.id + "/heading/widget", {
+            method: 'post',
+            body: JSON.stringify(widget),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => response.json());
 
     findHeadingWidgetById = (widgetId) =>
         fetch(this.HEADING_WIDGET_API_URL + widgetId)

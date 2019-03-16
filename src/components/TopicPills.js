@@ -37,6 +37,9 @@ class TopicPills extends React.Component {
             this.setState({
                 topics: topics
             })});
+        this.setState({
+            updateTopicFld: ''
+        })
     };
 
     deleteTopic = topic => {

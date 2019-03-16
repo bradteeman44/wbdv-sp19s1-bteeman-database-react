@@ -41,11 +41,10 @@ class CourseService {
     createWidget = (topic) => {
         console.log(topic.widgets)
         const widget = {
-            id: (new Date()).getTime(),
             title: 'New Widget',
             text: 'New Widget',
             size: 1,
-            editing: 'EDIT'
+            editing: true
         }
         console.log(widget)
         topic.widgets.push(widget);
@@ -62,10 +61,6 @@ class CourseService {
         return topic.widgets
     }
 
-    findAllWidgets = () => {
-        return this.widgets
-    }
-
     findWidget = (widgetId) => {
         this.widgets = this.widgets.find(
             widget => widget.id === widgetId
@@ -77,12 +72,10 @@ class CourseService {
         return topic.widgets
     }
 
-    deleteWidget = (topic, deleteWidget) => {
-        console.log(topic.widgets)
+    deleteWidget = (topic, deleteWidget) =>
         topic.widgets = topic.widgets.filter(
             widget => widget.id !== deleteWidget.id
         );
-    }
 
 }
 
